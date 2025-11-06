@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Tattoo Art — Portfolio</title>
+  <style>
+    :root{--accent:#111;--muted:#666}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:white;color:var(--accent)}
+    .container{max-width:1100px;margin:40px auto;padding:0 20px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    header h1{font-size:1.6rem;margin:0}
+    nav a{color:var(--accent);text-decoration:none;margin-left:18px;font-weight:600}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
+    .card{background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    .card figure{margin:0;cursor:pointer}
+    .card img{display:block;width:100%;height:220px;object-fit:cover;transition:transform 0.2s ease-in-out}
+    .card:hover img{transform:scale(1.03)}
+    .card .meta{padding:10px 12px}
+    .title{font-weight:700;font-size:0.96rem}
+    .sub{font-size:0.87rem;color:var(--muted);margin-top:6px}
+    .actions{display:flex;gap:8px;margin-top:10px}
+    button{background:var(--accent);color:white;border:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
+    .ghost{background:transparent;color:var(--accent);border:1px solid #ddd}
+
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
+    .modal.open{display:flex}
+    .modal .panel{width:100%;max-width:720px;background:white;border-radius:12px;overflow:hidden}
+    .panel .hero{height:340px;object-fit:cover;width:100%}
+    .panel .body{padding:18px}
+    .form-row{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+    input,textarea{padding:10px;border:1px solid #e6e6e6;border-radius:8px;font-size:0.95rem}
+    .small{font-size:0.86rem;color:var(--muted)}
+
+    footer{margin-top:40px;padding:18px 0;color:var(--muted);text-align:center}
+
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:100}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 25px rgba(255,255,255,0.2)}
+    .lightbox .arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:3rem;color:white;cursor:pointer;user-select:none;padding:10px}
+    .lightbox .arrow.left{left:20px}
+    .lightbox .arrow.right{right:20px}
+
+    @media (max-width:520px){.card img{height:180px}.panel .hero{height:200px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Your Name — Tattoo Art</h1>
+      <nav>
+        <a href="#work">My Tattoos</a>
+        <a href="#available">Available Designs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section id="work">
+      <h2 style="margin-top:28px">My Tattoos (Portfolio)</h2>
+      <p class="small">Photos of healed tattoos and fresh work. Images are sized uniformly for a clean grid.</p>
+      <div id="portfolio" class="grid">
+        <article class="card">
+          <figure>
+            <img src="images/portfolio1.jpg" alt="Tattoo example 1" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fportfolio1.jpg'"/>
+          </figure>
+          <div class="meta">
+            <div class="title">Blackwork Skull — Forearm</div>
+            <div class="sub">Done: Aug 2025 • Style: Blackwork • Medium: Machine</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <figure>
+            <img src="images/portfolio2.jpg" alt="Tattoo example 2" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fportfolio2.jpg'"/>
+          </figure>
+          <div class="meta">
+            <div class="title">Botanical Sketch — Thigh</div>
+            <div class="sub">Done: May 2025 • Style: Fine Line • Based on original drawing</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="available">
+      <h2 style="margin-top:34px">Available Designs</h2>
+      <p class="small">Click a design to view details and book it. Available designs can be reserved once booked.</p>
+
+      <div id="availableGrid" class="grid">
+        <article class="card" data-title="Raven Line Art" data-price="€80" data-id="design-001">
+          <figure>
+            <img src="images/design1.jpg" alt="Raven Line Art" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fdesign1.jpg'"/>
+          </figure>
+          <div class="meta">
+            <div class="title">Raven Line Art</div>
+            <div class="sub">Size: Small • Placement: Wrist</div>
+            <div class="actions">
+              <button class="bookBtn">Book this design</button>
+              <button class="ghost" onclick="markAsTaken(this)">Mark taken</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" data-title="Floral Flash" data-price="€120" data-id="design-002">
+          <figure>
+            <img src="images/design2.jpg" alt="Floral Flash" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fdesign2.jpg'"/>
+          </figure>
+          <div class="meta">
+            <div class="title">Floral Flash</div>
+            <div class="sub">Size: Medium • Placement: Shoulder</div>
+            <div class="actions">
+              <button class="bookBtn">Book this design</button>
+              <button class="ghost" onclick="markAsTaken(this)">Mark taken</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div>Want to add a custom piece or ask about a booking? <strong id="contactEmail">your-email@example.com</strong></div>
+    </footer>
+  </div>
+
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="panel" role="document">
+      <img id="modalImg" class="hero" src="" alt=""/>
+      <div class="body">
+        <h3 id="modalTitle">Design Title</h3>
+        <div id="modalPrice" class="small" style="margin-top:6px"></div>
+        <form id="bookingForm" style="margin-top:12px">
+          <div class="form-row">
+            <label class="small">Your name</label>
+            <input id="name" required placeholder="Your full name" />
+          </div>
+          <div class="form-row">
+            <label class="small">Phone or email</label>
+            <input id="contact" required placeholder="Phone number or email" />
+          </div>
+          <div class="form-row">
+            <label class="small">Notes (placement, dates...)</label>
+            <textarea id="notes" rows="3" placeholder="Any extra info"></textarea>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+            <button type="button" id="sendBtn">Book this design</button>
+            <button type="button" class="ghost" id="cancelBtn">Cancel</button>
+          </div>
+          <div id="sentMsg" style="margin-top:12px;display:none" class="small">Booking attempted — if your email client opened, please finish sending the message.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox">
+    <span class="arrow left">&#10094;</span>
+    <img src="" alt="large view" />
+    <span class="arrow right">&#10095;</span>
+  </div>
+
+  <script>
+    const CONTACT_EMAIL = 'your-email@example.com'
+    document.getElementById('contactEmail').textContent = CONTACT_EMAIL
+
+    document.querySelectorAll('.bookBtn').forEach(btn => {
+      btn.addEventListener('click', (e)=>{
+        const card = e.target.closest('.card')
+        openModal(card)
+      })
+    })
+
+    function openModal(card){
+      const title = card.dataset.title || card.querySelector('.title').innerText
+      const price = card.dataset.price || ''
+      const img = card.querySelector('img').src
+      document.getElementById('modalTitle').textContent = title
+      document.getElementById('modalPrice').textContent = price
+      document.getElementById('modalImg').src = img
+      document.getElementById('modal').classList.add('open')
+    }
+
+    document.getElementById('cancelBtn').addEventListener('click', closeModal)
+    document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this) closeModal() })
+    function closeModal(){document.getElementById('modal').classList.remove('open')}
+
+    document.getElementById('sendBtn').addEventListener('click', ()=>{
+      const title = document.getElementById('modalTitle').textContent
+      const name = document.getElementById('name').value || 'No name'
+      const contact = document.getElementById('contact').value || ''
+      const notes = document.getElementById('notes').value || ''
+      const subject = encodeURIComponent('Booking request — ' + title)
+      const body = encodeURIComponent(`Design: ${title}\nName: ${name}\nContact: ${contact}\nNotes: ${notes}`)
+      const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+      window.location.href = mailto
+      document.getElementById('sentMsg').style.display='block'
+    })
+
+    function markAsTaken(btn){
+      const card = btn.closest('.card')
+      card.style.opacity = 0.5
+      const taken = document.createElement('div')
+      taken.textContent = 'TAKEN'
+      taken.style.fontWeight='800'
+      taken.style.marginTop='8px'
+      card.querySelector('.meta').appendChild(taken)
+    }
+
+    const lightbox = document.getElementById('lightbox')
+    const lightboxImg = lightbox.querySelector('img')
+    const images = Array.from(document.querySelectorAll('.card figure img'))
+    let currentIndex = 0
+
+    images.forEach((img, i)=>{
+      img.addEventListener('click', ()=>{
+        currentIndex = i
+        showImage()
+      })
+    })
+
+    function showImage(){
+      lightboxImg.src = images[currentIndex].src
+      lightbox.classList.add('open')
+    }
+
+    function nextImage(){currentIndex = (currentIndex + 1) % images.length; showImage()}
+    function prevImage(){currentIndex = (currentIndex - 1 + images.length) % images.length; showImage()}
+
+    document.querySelector('.lightbox .arrow.right').addEventListener('click', nextImage)
+    document.querySelector('.lightbox .arrow.left').addEventListener('click', prevImage)
+
+    lightbox.addEventListener('click', e=>{
+      if(e.target===lightbox) lightbox.classList.remove('open')
+    })
+
+    document.addEventListener('keydown', e=>{
+      if(e.key==='Escape'){closeModal(); lightbox.classList.remove('open')}
+      if(e.key==='ArrowRight' && lightbox.classList.contains('open')) nextImage()
+      if(e.key==='ArrowLeft' && lightbox.classList.contains('open')) prevImage()
+    })
+  </script>
+</body>
+</html>
