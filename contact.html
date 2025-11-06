@@ -7,7 +7,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:sans-serif;color:#111;background:white;padding-top:160px;}
-/* Header same as other pages */
+
+/* Header */
 header{width:100%;position:fixed;top:0;left:0;background:rgba(255,255,255,0.95);z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.05);display:flex;flex-direction:column;align-items:center;padding:20px 0 10px;}
 .header-main{width:100%;max-width:650px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
 header h1 a{text-decoration:none;color:#111;font-size:1.8rem;font-weight:bold;}
@@ -36,4 +37,49 @@ section a{color:#111;text-decoration:underline;}
     <div id="langToggle">AL</div>
   </div>
   <nav>
-    <a href
+    <a href="tattoos.html">Tattoos</a>
+    <a href="designs.html">My Designs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section>
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a></p>
+  <p>Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a></p>
+  <p>Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a></p>
+  <p>DM me on Instagram or use email/phone to book a design ❤️</p>
+</section>
+
+<div class="map-container">
+  <iframe
+    src="https://www.google.com/maps/dir//Eqrem+%C3%87abej,+Prishtina+10000/@42.6548209,21.0788903,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x135499fec5ba1681:0xe3288ef893f8497f!2m2!1d21.161291!2d42.6548504?entry=ttu"
+    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+<script>
+// Language toggle
+const langToggle = document.getElementById('langToggle');
+const navLinks = document.querySelectorAll('nav a');
+let isAlbanian = false;
+
+langToggle.addEventListener('click', ()=>{
+  isAlbanian = !isAlbanian;
+
+  navLinks[0].textContent = isAlbanian ? 'Tatuazhet' : 'Tattoos';
+  navLinks[1].textContent = isAlbanian ? 'Dizajnet e Mia' : 'My Designs';
+  navLinks[2].textContent = isAlbanian ? 'Kontakti' : 'Contact';
+
+  const section = document.querySelector('section');
+  section.querySelectorAll('p')[0].innerHTML = isAlbanian ? 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>' : 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>';
+  section.querySelectorAll('p')[1].innerHTML = isAlbanian ? 'Telefon/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>' : 'Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>';
+  section.querySelectorAll('p')[2].innerHTML = isAlbanian ? 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>' : 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>';
+  section.querySelectorAll('p')[3].textContent = isAlbanian ? 'Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️' : 'DM me on Instagram or use email/phone to book a design ❤️';
+
+  langToggle.textContent = isAlbanian ? 'EN' : 'AL';
+});
+</script>
+
+</body>
+</html>
