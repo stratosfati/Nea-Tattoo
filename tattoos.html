@@ -2,209 +2,208 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Nea Tattoo - Tattoos</title>
-
 <style>
-body {
-  margin: 0;
-  font-family: sans-serif;
-  background: white;
-  color: #111;
-}
+  body {
+    margin: 0;
+    font-family: sans-serif;
+    background: white;
+    color: #111;
+  }
 
-/* Header styling */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  position: relative;
-}
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
 
-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-}
+  header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+  }
 
-header h1 a {
-  text-decoration: none;
-  color: #111;
-}
+  nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #111;
+    font-weight: 600;
+  }
 
-/* Nav links */
-nav {
-  display: flex;
-  gap: 20px;
-}
+  .language-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
 
-nav a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 600;
-}
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+  }
 
-/* Language icon */
-.lang-toggle {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  opacity: 0.7;
-}
-.lang-toggle:hover {
-  opacity: 1;
-}
+  .tattoo-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+  }
 
-/* Section layout */
-section {
-  padding: 20px;
-}
+  .tattoo-gallery img {
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    object-fit: cover;
+  }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+  /* Lightbox styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+  }
 
-/* Grid layout for tattoos */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  max-width: 800px;
-  margin: auto;
-  padding: 0 20px;
-}
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+  }
 
-.grid img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+  .close, .prev, .next {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+  }
 
-.grid img:hover {
-  transform: scale(1.02);
-}
+  .close {
+    top: 20px;
+    right: 30px;
+  }
 
-/* Lightbox */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  z-index: 100;
-}
+  .prev, .next {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+  }
 
-.lightbox.open {
-  display: flex;
-}
+  .prev { left: 30px; }
+  .next { right: 30px; }
 
-.lightbox img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 12px;
-}
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
 
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  font-size: 2rem;
-  cursor: pointer;
-  user-select: none;
-  padding: 10px;
-  opacity: 0.8;
-}
+    nav a {
+      margin-left: 10px;
+      font-size: 0.95rem;
+    }
 
-.arrow:hover {
-  opacity: 1;
-}
-
-.arrow.left {
-  left: 30px;
-}
-.arrow.right {
-  right: 30px;
-}
-
-.close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-}
+    .prev, .next {
+      font-size: 1.5rem;
+    }
+  }
 </style>
 </head>
 
 <body>
 
+<div class="language-toggle" id="languageToggle">🌐</div>
+
 <header>
-  <h1><a href="index.html">Nea Tattoo</a></h1>
+  <h1><a href="index.html" style="text-decoration:none;color:#111;">Nea Tattoo</a></h1>
   <nav>
     <a href="tattoos.html">Tattoos</a>
     <a href="designs.html">My Designs</a>
     <a href="contact.html">Contact</a>
   </nav>
-  <span class="lang-toggle" title="Switch language">🌐</span>
 </header>
 
-<section>
+<main>
   <h2>Tattoos</h2>
-  <div class="grid">
-    <img src="images/tattoo1.jpg" alt="Tattoo 1">
-    <img src="images/tattoo2.jpg" alt="Tattoo 2">
-    <img src="images/tattoo3.jpg" alt="Tattoo 3">
-    <img src="images/tattoo4.jpg" alt="Tattoo 4">
-    <!-- Add more tattoo images -->
+  <div class="tattoo-gallery">
+    <img src="tattoo1.jpg" alt="Tattoo 1">
+    <img src="tattoo2.jpg" alt="Tattoo 2">
+    <img src="tattoo3.jpg" alt="Tattoo 3">
   </div>
-</section>
+</main>
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
-  <span class="close" onclick="closeLightbox()">&times;</span>
-  <span class="arrow left" onclick="prevImage()">&#10094;</span>
-  <img id="lb-img" src="" alt="Full size">
-  <span class="arrow right" onclick="nextImage()">&#10095;</span>
+  <span class="close" id="closeBtn">&times;</span>
+  <span class="prev" id="prevBtn">&#10094;</span>
+  <img id="lightboxImage" src="">
+  <span class="next" id="nextBtn">&#10095;</span>
 </div>
 
 <script>
-const images = document.querySelectorAll('.grid img');
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lb-img');
-let currentIndex = 0;
+  const images = document.querySelectorAll('.tattoo-gallery img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const closeBtn = document.getElementById('closeBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
 
-images.forEach((img, index) => {
-  img.addEventListener('click', () => {
-    currentIndex = index;
-    lbImg.src = img.src;
-    lightbox.classList.add('open');
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener('click', () => {
+      lightbox.style.display = 'flex';
+      lightboxImage.src = img.src;
+      currentIndex = index;
+    });
   });
-});
 
-function closeLightbox() {
-  lightbox.classList.remove('open');
-}
+  closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
 
-function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
-  lbImg.src = images[currentIndex].src;
-}
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    lightboxImage.src = images[currentIndex].src;
+  });
 
-function prevImage() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  lbImg.src = images[currentIndex].src;
-}
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    lightboxImage.src = images[currentIndex].src;
+  });
+
+  // Language toggle
+  document.getElementById('languageToggle').addEventListener('click', () => {
+    const currentLang = document.documentElement.lang;
+    if (currentLang === 'en') {
+      document.documentElement.lang = 'sq';
+      document.querySelector('h2').textContent = 'Tatuazhet';
+      document.querySelector('nav a[href="tattoos.html"]').textContent = 'Tatuazhet';
+      document.querySelector('nav a[href="designs.html"]').textContent = 'Dizajnet e Mia';
+      document.querySelector('nav a[href="contact.html"]').textContent = 'Kontakti';
+    } else {
+      document.documentElement.lang = 'en';
+      document.querySelector('h2').textContent = 'Tattoos';
+      document.querySelector('nav a[href="tattoos.html"]').textContent = 'Tattoos';
+      document.querySelector('nav a[href="designs.html"]').textContent = 'My Designs';
+      document.querySelector('nav a[href="contact.html"]').textContent = 'Contact';
+    }
+  });
 </script>
 
 </body>
