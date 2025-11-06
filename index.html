@@ -20,32 +20,11 @@ body {
   padding: 20px;
 }
 
-/* Header layout */
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-  width: 100%;
-  max-width: 650px;
-}
-
-.header-main {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-header h1 a {
-  text-decoration: none;
-  color: #111;
-  font-size: 2rem;
-  font-weight: bold;
-}
-
+/* Language toggle in top-right */
 #langToggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
@@ -57,24 +36,12 @@ header h1 a {
 }
 #langToggle:hover { background: #333; }
 
-nav {
-  margin-top: 15px;
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-  flex-wrap: wrap;
+/* Main content */
+main h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
 }
 
-nav a {
-  text-decoration: none;
-  color: #111;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: transform 0.2s;
-}
-nav a:hover { transform: scale(1.05); }
-
-/* Main buttons (links) */
 main a {
   display: block;
   width: 220px;
@@ -90,29 +57,18 @@ main a {
 main a:hover { transform: scale(1.05); }
 
 @media(max-width:600px){
-  header h1 a{ font-size:1.6rem; }
   #langToggle{ font-size:0.9rem; padding:3px 8px; }
-  nav{ gap:15px; }
+  main h2{ font-size:1.6rem; margin-bottom:30px; }
   main a{ width:160px; padding:14px; font-size:0.9rem; }
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-main">
-    <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div id="langToggle">AL</div>
-  </div>
-  <nav>
-    <a href="tattoos.html" id="tattoos-link">Tattoos</a>
-    <a href="designs.html" id="designs-link">My Designs</a>
-    <a href="contact.html" id="contact-link">Contact</a>
-  </nav>
-</header>
+<div id="langToggle">AL</div>
 
 <main>
-  <h2 id="welcome">Welcome to Nea Tattoo</h2>
+  <h2 id="title">Nea Tattoo</h2>
 
   <a href="tattoos.html" id="tattoos-btn">Tattoos</a>
   <a href="designs.html" id="designs-btn">My Designs</a>
@@ -122,37 +78,28 @@ main a:hover { transform: scale(1.05); }
 <script>
 let lang = 'en';
 
-const welcome = document.getElementById('welcome');
-const tattoosLink = document.getElementById('tattoos-link');
-const designsLink = document.getElementById('designs-link');
-const contactLink = document.getElementById('contact-link');
+const title = document.getElementById('title');
 const tattoosBtn = document.getElementById('tattoos-btn');
 const designsBtn = document.getElementById('designs-btn');
 const contactBtn = document.getElementById('contact-btn');
 
-function toggleLanguage() {
-  if (lang === 'en') {
-    welcome.textContent = 'Mirësevini në Nea Tattoo';
-    tattoosLink.textContent = 'Tatuazhet';
-    designsLink.textContent = 'Dizajnet e Mia';
-    contactLink.textContent = 'Kontakti';
+document.getElementById('langToggle').addEventListener('click', ()=>{
+  if(lang==='en'){
+    title.textContent = 'Nea Tattoo';
     tattoosBtn.textContent = 'Tatuazhet';
     designsBtn.textContent = 'Dizajnet e Mia';
     contactBtn.textContent = 'Kontakti';
-    lang = 'sq';
+    lang='sq';
+    document.getElementById('langToggle').textContent='EN';
   } else {
-    welcome.textContent = 'Welcome to Nea Tattoo';
-    tattoosLink.textContent = 'Tattoos';
-    designsLink.textContent = 'My Designs';
-    contactLink.textContent = 'Contact';
+    title.textContent = 'Nea Tattoo';
     tattoosBtn.textContent = 'Tattoos';
     designsBtn.textContent = 'My Designs';
     contactBtn.textContent = 'Contact';
-    lang = 'en';
+    lang='en';
+    document.getElementById('langToggle').textContent='AL';
   }
-}
-
-document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+});
 </script>
 
 </body>
