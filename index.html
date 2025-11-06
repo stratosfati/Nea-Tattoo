@@ -1,236 +1,102 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nea Tattoo</title>
-  <style>
-    :root{--accent:#111;--muted:#666}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;background:white;color:var(--accent)}
-    .container{max-width:1100px;margin:40px auto;padding:0 20px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:20px}
-    header h1{font-size:1.6rem;margin:0}
-    nav a{color:var(--accent);text-decoration:none;margin-left:18px;font-weight:600}
-
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:18px}
-    .card{background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
-    .card figure{margin:0;cursor:pointer}
-    .card img{display:block;width:100%;height:220px;object-fit:cover;transition:transform 0.2s ease-in-out}
-    .card:hover img{transform:scale(1.03)}
-    .card .meta{padding:10px 12px}
-    .title{font-weight:700;font-size:0.96rem}
-    .sub{font-size:0.87rem;color:var(--muted);margin-top:6px}
-    .actions{display:flex;gap:8px;margin-top:10px}
-    button{background:var(--accent);color:white;border:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700}
-    .ghost{background:transparent;color:var(--accent);border:1px solid #ddd}
-
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:60}
-    .modal.open{display:flex}
-    .modal .panel{width:100%;max-width:720px;background:white;border-radius:12px;overflow:hidden}
-    .panel .hero{height:340px;object-fit:cover;width:100%}
-    .panel .body{padding:18px}
-    .form-row{display:flex;flex-direction:column;gap:6px;margin-top:8px}
-    input,textarea{padding:10px;border:1px solid #e6e6e6;border-radius:8px;font-size:0.95rem}
-    .small{font-size:0.86rem;color:var(--muted)}
-
-    footer{margin-top:40px;padding:18px 0;color:var(--muted);text-align:center}
-
-    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:100}
-    .lightbox.open{display:flex}
-    .lightbox img{max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 25px rgba(255,255,255,0.2)}
-    .lightbox .arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:3rem;color:white;cursor:pointer;user-select:none;padding:10px}
-    .lightbox .arrow.left{left:20px}
-    .lightbox .arrow.right{right:20px}
-
-    @media (max-width:520px){.card img{height:180px}.panel .hero{height:200px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nea Tattoo</title>
+<style>
+body{margin:0;font-family:sans-serif;background:white;color:#111}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+header h1{margin:0;font-size:1.6rem}
+nav a{margin-left:20px;text-decoration:none;color:#111;font-weight:600}
+section{padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;padding-top:10px}
+.grid img{width:100%;height:220px;object-fit:cover;cursor:pointer;border-radius:8px;transition:transform 0.2s}
+.grid img:hover{transform:scale(1.03)}
+.grid div{display:flex;flex-direction:column;gap:5px} /* for designs buttons */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:100}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90%;max-height:90%;border-radius:12px}
+.lightbox .close{position:absolute;top:20px;right:30px;font-size:2rem;color:white;cursor:pointer}
+button{padding:10px 12px;border:none;border-radius:8px;background:#111;color:white;cursor:pointer;font-weight:700}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Nea Tattoo</h1>
-      <nav>
-        <a href="#work">Tattoos</a>
-        <a href="#available">Available Designs</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <section id="work">
-      <h2 style="margin-top:28px">Tattoos</h2>
-      <p class="small">Photo gallery of tattoos and designs.</p>
-      <div id="portfolio" class="grid">
-        <article class="card">
-          <figure>
-            <img src="images/portfolio1.jpg" alt="Tattoo example 1" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fportfolio1.jpg'"/>
-          </figure>
-        </div>
-        </article>
+<header>
+  <h1>Nea Tattoo</h1>
+  <nav>
+    <a href="#tattoos">Tattoos</a>
+    <a href="#designs">My Designs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-        <article class="card">
-          <figure>
-            <img src="images/portfolio2.jpg" alt="Tattoo example 2" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fportfolio2.jpg'"/>
-          </figure>
-          <div class="meta">
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="available">
-      <h2 style="margin-top:34px">Available Designs</h2>
-      <p class="small">Click a design to view details and book it. Available designs can be reserved once booked.</p>
-
-      <div id="availableGrid" class="grid">
-        <article class="card" data-title="FLASH SHEET 1" data-price="€80" data-id="design-001">
-          <figure>
-            <img src="1000085163.jpg" alt="FLASH SHEET 1" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fdesign1.jpg'"/>
-          </figure>
-          <div class="meta">
-            <div class="title">FLASH SHEET 1</div>
-            <div class="actions">
-              <button class="bookBtn">Book this design</button>
-              <button class="ghost" onclick="markAsTaken(this)">Mark taken</button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" data-title="Floral Flash" data-price="€120" data-id="design-002">
-          <figure>
-            <img src="images/design2.jpg" alt="Floral Flash" onerror="this.src='https://via.placeholder.com/600x400?text=Add+images%2Fdesign2.jpg'"/>
-          </figure>
-          <div class="meta">
-            <div class="title">Floral Flash</div>
-            <div class="sub">Size: Medium • Placement: Shoulder</div>
-            <div class="actions">
-              <button class="bookBtn">Book this design</button>
-              <button class="ghost" onclick="markAsTaken(this)">Mark taken</button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <footer id="contact">
-      <div>Want to add a custom piece or ask about a booking? <strong id="contactEmail">your-email@example.com</strong></div>
-    </footer>
+<!-- Tattoos Section -->
+<section id="tattoos">
+  <h2>Tattoos</h2>
+  <div class="grid">
+    <img src="images/tattoo1.jpg" alt="Tattoo 1">
+    <img src="images/tattoo2.jpg" alt="Tattoo 2">
+    <img src="images/tattoo3.jpg" alt="Tattoo 3">
+    <!-- Add more tattoo images here -->
   </div>
+</section>
 
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <div class="panel" role="document">
-      <img id="modalImg" class="hero" src="" alt=""/>
-      <div class="body">
-        <h3 id="modalTitle">Design Title</h3>
-        <div id="modalPrice" class="small" style="margin-top:6px"></div>
-        <form id="bookingForm" style="margin-top:12px">
-          <div class="form-row">
-            <label class="small">Your name</label>
-            <input id="name" required placeholder="Your full name" />
-          </div>
-          <div class="form-row">
-            <label class="small">Phone or email</label>
-            <input id="contact" required placeholder="Phone number or email" />
-          </div>
-          <div class="form-row">
-            <label class="small">Notes (placement, dates...)</label>
-            <textarea id="notes" rows="3" placeholder="Any extra info"></textarea>
-          </div>
-
-          <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
-            <button type="button" id="sendBtn">Book this design</button>
-            <button type="button" class="ghost" id="cancelBtn">Cancel</button>
-          </div>
-          <div id="sentMsg" style="margin-top:12px;display:none" class="small">Booking attempted — if your email client opened, please finish sending the message.</div>
-        </form>
-      </div>
+<!-- Designs Section -->
+<section id="designs">
+  <h2>Available Designs</h2>
+  <div class="grid">
+    <div>
+      <img src="images/design1.jpg" alt="Design 1">
+      <button onclick="book('Design 1')">Book this design</button>
     </div>
+    <div>
+      <img src="images/design2.jpg" alt="Design 2">
+      <button onclick="book('Design 2')">Book this design</button>
+    </div>
+    <div>
+      <img src="images/design3.jpg" alt="Design 3">
+      <button onclick="book('Design 3')">Book this design</button>
+    </div>
+    <!-- Add more design images here -->
   </div>
+</section>
 
-  <div id="lightbox" class="lightbox">
-    <span class="arrow left">&#10094;</span>
-    <img src="" alt="large view" />
-    <span class="arrow right">&#10095;</span>
-  </div>
+<!-- Contact Section -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Email: <strong>your-email@example.com</strong></p>
+  <p>Phone: <strong>+123 456 7890</strong></p>
+</section>
 
-  <script>
-    const CONTACT_EMAIL = 'your-email@example.com'
-    document.getElementById('contactEmail').textContent = CONTACT_EMAIL
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="close" onclick="lightbox.classList.remove('open')">&times;</span>
+  <img id="lb-img" src="" alt="Full size">
+</div>
 
-    document.querySelectorAll('.bookBtn').forEach(btn => {
-      btn.addEventListener('click', (e)=>{
-        const card = e.target.closest('.card')
-        openModal(card)
-      })
-    })
+<script>
+const images = document.querySelectorAll('.grid img');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
 
-    function openModal(card){
-      const title = card.dataset.title || card.querySelector('.title').innerText
-      const price = card.dataset.price || ''
-      const img = card.querySelector('img').src
-      document.getElementById('modalTitle').textContent = title
-      document.getElementById('modalPrice').textContent = price
-      document.getElementById('modalImg').src = img
-      document.getElementById('modal').classList.add('open')
-    }
+// Lightbox functionality
+images.forEach(img=>{
+  img.addEventListener('click', ()=>{
+    lbImg.src = img.src;
+    lightbox.classList.add('open');
+  });
+});
 
-    document.getElementById('cancelBtn').addEventListener('click', closeModal)
-    document.getElementById('modal').addEventListener('click', function(e){ if(e.target===this) closeModal() })
-    function closeModal(){document.getElementById('modal').classList.remove('open')}
+// Book button function
+function book(title){
+  const email = 'your-email@example.com';
+  const subject = encodeURIComponent('Booking request — ' + title);
+  const body = encodeURIComponent('Hi, I would like to book the design: ' + title);
+  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+}
+</script>
 
-    document.getElementById('sendBtn').addEventListener('click', ()=>{
-      const title = document.getElementById('modalTitle').textContent
-      const name = document.getElementById('name').value || 'No name'
-      const contact = document.getElementById('contact').value || ''
-      const notes = document.getElementById('notes').value || ''
-      const subject = encodeURIComponent('Booking request — ' + title)
-      const body = encodeURIComponent(`Design: ${title}\nName: ${name}\nContact: ${contact}\nNotes: ${notes}`)
-      const mailto = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
-      window.location.href = mailto
-      document.getElementById('sentMsg').style.display='block'
-    })
-
-    function markAsTaken(btn){
-      const card = btn.closest('.card')
-      card.style.opacity = 0.5
-      const taken = document.createElement('div')
-      taken.textContent = 'TAKEN'
-      taken.style.fontWeight='800'
-      taken.style.marginTop='8px'
-      card.querySelector('.meta').appendChild(taken)
-    }
-
-    const lightbox = document.getElementById('lightbox')
-    const lightboxImg = lightbox.querySelector('img')
-    const images = Array.from(document.querySelectorAll('.card figure img'))
-    let currentIndex = 0
-
-    images.forEach((img, i)=>{
-      img.addEventListener('click', ()=>{
-        currentIndex = i
-        showImage()
-      })
-    })
-
-    function showImage(){
-      lightboxImg.src = images[currentIndex].src
-      lightbox.classList.add('open')
-    }
-
-    function nextImage(){currentIndex = (currentIndex + 1) % images.length; showImage()}
-    function prevImage(){currentIndex = (currentIndex - 1 + images.length) % images.length; showImage()}
-
-    document.querySelector('.lightbox .arrow.right').addEventListener('click', nextImage)
-    document.querySelector('.lightbox .arrow.left').addEventListener('click', prevImage)
-
-    lightbox.addEventListener('click', e=>{
-      if(e.target===lightbox) lightbox.classList.remove('open')
-    })
-
-    document.addEventListener('keydown', e=>{
-      if(e.key==='Escape'){closeModal(); lightbox.classList.remove('open')}
-      if(e.key==='ArrowRight' && lightbox.classList.contains('open')) nextImage()
-      if(e.key==='ArrowLeft' && lightbox.classList.contains('open')) prevImage()
-    })
-  </script>
 </body>
 </html>
