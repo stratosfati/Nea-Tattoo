@@ -36,16 +36,16 @@ button{padding:10px 12px;border:none;border-radius:8px;background:#111;color:whi
   <h2>Available Designs</h2>
   <div class="grid">
     <div>
-      <img src="images/design1.jpg" alt="Design 1">
-      <button onclick="book('Design 1')">Book this design</button>
+      <img src="IMG_20251029_221251_689.jpg" alt="Design 1">
+      <button onclick="book('FLASH SHEET #1')">Book this design</button>
     </div>
     <div>
-      <img src="images/design2.jpg" alt="Design 2">
-      <button onclick="book('Design 2')">Book this design</button>
+      <img src="1000085207.jpg" alt="Design 2">
+      <button onclick="book('FLASH SHEET #2')">Book this design</button>
     </div>
     <div>
-      <img src="images/design3.jpg" alt="Design 3">
-      <button onclick="book('Design 3')">Book this design</button>
+      <img src="1000085163.jpg" alt="Design 3">
+      <button onclick="book('FLASH SHEET #3')">Book this design</button>
     </div>
     <!-- Add more design images here -->
   </div>
@@ -69,7 +69,7 @@ images.forEach(img=>{
 });
 
 function book(title){
-  const email = 'your-email@example.com'; // replace with your email
+  const email = 'neaatattoo@gmail.com'; // replace with your email
   const subject = encodeURIComponent('Booking request — ' + title);
   const body = encodeURIComponent('Hi, I would like to book the design: ' + title);
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
