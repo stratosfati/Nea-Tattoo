@@ -11,52 +11,71 @@ body {
   font-family: sans-serif;
   background: white;
   color: #111;
-  padding-top: 70px;
+  padding-top: 90px;
 }
 
 /* Header */
 header {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   position: fixed;
   top: 0;
-  padding: 15px 0;
+  left: 0;
   background: rgba(255,255,255,0.95);
   z-index: 50;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 10px 0 5px;
 }
+
 header h1 a {
   text-decoration: none;
   color: #111;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
+
 nav {
   display: flex;
   gap: 20px;
-  position: absolute;
-  right: 20px;
+  margin-top: 10px;
 }
-nav a { text-decoration: none; color: #111; font-weight: 600; }
+
+nav a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+}
+
+.lang-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #111;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.lang-btn:hover { opacity: 1; }
 
 /* Grid layout */
 .grid {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  max-width: 600px;
+  gap: 25px;
+  padding: 0 20px 40px;
+  max-width: 650px;
   margin: 0 auto;
 }
 
 .grid div {
-  border: 2px solid #111;
   border-radius: 12px;
   overflow: hidden;
   background: #fff;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 0 8px rgba(0,0,0,0.08);
 }
 
 .grid img {
@@ -66,18 +85,19 @@ nav a { text-decoration: none; color: #111; font-weight: 600; }
   cursor: pointer;
   transition: transform 0.2s;
 }
+
 .grid img:hover { transform: scale(1.02); }
 
 button {
   padding: 12px;
   border: none;
-  border-radius: 0 0 12px 12px;
   background: #111;
   color: white;
   cursor: pointer;
   font-weight: 700;
   width: 100%;
   font-size: 1rem;
+  border-radius: 0 0 12px 12px;
 }
 
 /* Lightbox */
@@ -90,24 +110,39 @@ button {
   justify-content: center;
   z-index: 100;
   flex-direction: column;
+  padding: 20px;
 }
+
 .lightbox.open { display: flex; }
-.lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; }
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 12px;
+}
+
 .lightbox .controls {
-  margin-top: 15px;
+  margin-top: 20px;
   display: flex;
-  justify-content: space-between;
-  width: 200px;
+  gap: 20px;
 }
-.lightbox .controls button {
-  padding: 10px 15px;
-  font-size: 1rem;
+
+.lightbox .ctrl-btn {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+.lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
 /* Responsive */
 @media(max-width:480px){
-  header h1 { font-size: 1.4rem; }
-  nav { right: 10px; gap: 10px; font-size: 0.9rem; }
+  header h1 a { font-size: 1.5rem; }
+  nav { gap: 12px; font-size: 0.9rem; }
 }
 </style>
 </head>
@@ -120,10 +155,11 @@ button {
     <a href="designs.html">My Designs</a>
     <a href="contact.html">Contact</a>
   </nav>
+  <button class="lang-btn" title="Translate page">🌐</button>
 </header>
 
 <section>
-  <h2 style="text-align:center;margin-bottom:20px;">Available Designs</h2>
+  <h2 style="text-align:center;margin-bottom:25px;">Available Designs</h2>
   <div class="grid">
     <div>
       <img src="images/FLASH 1.jpg" alt="Design 1">
@@ -137,7 +173,6 @@ button {
       <img src="images/1000085163.jpg" alt="Design 3">
       <a href="contact.html"><button>Book this design</button></a>
     </div>
-    <!-- Add more designs here -->
   </div>
 </section>
 
@@ -145,9 +180,9 @@ button {
 <div class="lightbox" id="lightbox">
   <img id="lb-img" src="" alt="Full size">
   <div class="controls">
-    <button id="prev">⬅️</button>
-    <button id="next">➡️</button>
-    <button onclick="lightbox.classList.remove('open')">✖️</button>
+    <button id="prev" class="ctrl-btn">←</button>
+    <button id="next" class="ctrl-btn">→</button>
+    <button id="close" class="ctrl-btn">✕</button>
   </div>
 </div>
 
@@ -157,21 +192,24 @@ const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
 let currentIndex = 0;
 
-images.forEach((img,i)=>{
-  img.addEventListener('click', ()=>{
+images.forEach((img, i) => {
+  img.addEventListener('click', () => {
     currentIndex = i;
     lbImg.src = img.src;
     lightbox.classList.add('open');
   });
 });
 
-document.getElementById('next').addEventListener('click', ()=>{
+document.getElementById('next').addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % images.length;
   lbImg.src = images[currentIndex].src;
 });
-document.getElementById('prev').addEventListener('click', ()=>{
+document.getElementById('prev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   lbImg.src = images[currentIndex].src;
+});
+document.getElementById('close').addEventListener('click', () => {
+  lightbox.classList.remove('open');
 });
 </script>
 
