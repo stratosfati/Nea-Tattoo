@@ -6,42 +6,85 @@
 <title>Nea Tattoo - Contact</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:sans-serif;color:#111;background:white;padding-top:160px;}
+body{font-family:sans-serif;color:#111;background:white;}
 
 /* Header */
-header{width:100%;position:fixed;top:0;left:0;background:rgba(255,255,255,0.95);z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.05);display:flex;flex-direction:column;align-items:center;padding:20px 0 10px;}
-.header-main{width:100%;max-width:650px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;}
-header h1 a{text-decoration:none;color:#111;font-size:1.8rem;font-weight:bold;}
-#langToggle{cursor:pointer;font-size:1rem;font-weight:bold;padding:4px 10px;border-radius:8px;background:#111;color:white;transition:0.2s;}
+header{
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background:rgba(255,255,255,0.95);
+  z-index:50;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  display:flex;
+  justify-content:flex-end;
+  padding:15px 20px;
+}
+#langToggle{
+  cursor:pointer;
+  font-size:1rem;
+  font-weight:bold;
+  padding:4px 10px;
+  border-radius:8px;
+  background:#111;
+  color:white;
+  transition:0.2s;
+}
 #langToggle:hover{background:#333;}
-nav{margin-top:15px;display:flex;gap:25px;justify-content:center;flex-wrap:wrap;}
+
+/* Navigation below header */
+nav{
+  margin-top:90px;
+  display:flex;
+  gap:25px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
 nav a{text-decoration:none;color:#111;font-weight:600;font-size:1rem;}
+nav a:hover{transform:scale(1.05);transition:0.2s;}
 
 /* Contact section */
-section{max-width:600px;margin:40px auto 20px auto;text-align:center;padding:20px;}
+section{
+  max-width:600px;
+  margin:150px auto 20px auto; /* pushes content below header */
+  text-align:center;
+  padding:20px;
+}
 section h2{margin-bottom:20px;font-size:2rem;}
 section p{margin-bottom:12px;font-size:1rem;}
 section a{color:#111;text-decoration:underline;}
 
-/* Map */
-.map-container{width:100%;max-width:600px;height:300px;margin:20px auto;border-radius:12px;overflow:hidden;}
+/* Map container */
+.map-container{
+  width:100%;
+  max-width:600px;
+  height:300px;
+  min-height:250px;
+  margin:20px auto;
+  border-radius:12px;
+  overflow:hidden;
+}
 
-@media(max-width:480px){header h1 a{font-size:1.5rem;} nav{gap:15px;} #langToggle{font-size:0.9rem;padding:3px 8px;} .map-container{height:250px;}}
+@media(max-width:480px){
+  nav{gap:15px;}
+  section{margin-top:130px;}
+  .map-container{height:250px;}
+  #langToggle{font-size:0.9rem;padding:3px 8px;}
+}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-main">
-    <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div id="langToggle">AL</div>
-  </div>
-  <nav>
-    <a href="tattoos.html">Tattoos</a>
-    <a href="designs.html">My Designs</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div id="langToggle">AL</div>
 </header>
+
+<nav>
+  <a href="tattoos.html">Tattoos</a>
+  <a href="designs.html">My Designs</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
 <section>
   <h2>Contact</h2>
