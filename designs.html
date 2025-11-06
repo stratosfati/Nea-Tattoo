@@ -3,28 +3,155 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<h1><a href="index.html" style="text-decoration:none;color:#111;">Nea Tattoo</a></h1>
+<title>Nea Tattoo - Designs</title>
 <style>
-body{margin:0;font-family:sans-serif;background:white;color:#111}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-header h1{margin:0;font-size:1.6rem}
-nav a{margin-left:20px;text-decoration:none;color:#111;font-weight:600}
-section{padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:15px;padding-top:10px}
-.grid div{display:flex;flex-direction:column;gap:5px}
-.grid img{width:100%;height:220px;object-fit:cover;cursor:pointer;border-radius:8px;transition:transform 0.2s}
-.grid img:hover{transform:scale(1.03)}
-button{padding:10px 12px;border:none;border-radius:8px;background:#111;color:white;cursor:pointer;font-weight:700}
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:100}
-.lightbox.open{display:flex}
-.lightbox img{max-width:90%;max-height:90%;border-radius:12px}
-.lightbox .close{position:absolute;top:20px;right:30px;font-size:2rem;color:white;cursor:pointer}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: sans-serif;
+  background: white;
+  color: #111;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+/* Header */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  padding: 15px 0;
+  background: rgba(255,255,255,0.95);
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+header h1 a {
+  text-decoration: none;
+  color: #111;
+  font-size: 1.6rem;
+}
+
+/* Language toggle */
+#langToggle {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+#langToggle:hover { background: #333; }
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  right: 60px;
+}
+nav a {
+  text-decoration: none;
+  color: #111;
+  font-weight: 600;
+}
+
+/* Full-page image sections */
+section.image-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+section.image-section img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border-radius: 8px;
+}
+section.image-section img:hover { transform: scale(1.02); }
+section.image-section button {
+  margin-top: 15px;
+  padding: 12px 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+section.image-section button:hover { background: #333; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  flex-direction: column;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+.lightbox .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
+.lightbox .arrow {
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+  padding: 10px;
+}
+.lightbox .arrow.left { left: 20px; }
+.lightbox .arrow.right { right: 20px; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  header h1 { font-size: 1.4rem; }
+  nav { right: 20px; gap: 10px; font-size: 0.9rem; }
+  #langToggle { font-size: 1rem; padding: 4px 8px; }
+  section.image-section img { height: 70%; }
+  section.image-section button { font-size: 0.9rem; padding: 10px 14px; }
+}
 </style>
 </head>
 <body>
 
 <header>
-  <h1>       </h1>
+  <h1><a href="index.html">Nea Tattoo</a></h1>
+  <div id="langToggle">AL</div>
   <nav>
     <a href="tattoos.html">Tattoos</a>
     <a href="designs.html">My Designs</a>
@@ -32,43 +159,92 @@ button{padding:10px 12px;border:none;border-radius:8px;background:#111;color:whi
   </nav>
 </header>
 
-<section>
-  <h2>Available Designs</h2>
-  <div class="grid">
-    <div>
-      <img src="images/FLASH 1.jpg" alt="Design 1">
-      <a href="contact.html"><button>Book this design</button></a>
-    </div>
-    <div>
-      <img src="images/1000085207.jpg" alt="Design 2">
-      <a href="contact.html"><button>Book this design</button></a>
-    </div>
-    <div>
-      <img src="images/1000085163.jpg" alt="Design 3">
-      <a href="contact.html"><button>Book this design</button></a>
-    </div>
-    <!-- Add more design images here -->
-  </div>
+<!-- Full-screen design sections -->
+<section class="image-section">
+  <img src="images/FLASH 1.jpg" alt="Design 1">
+  <a href="contact.html"><button>Book this design</button></a>
 </section>
 
+<section class="image-section">
+  <img src="images/1000085207.jpg" alt="Design 2">
+  <a href="contact.html"><button>Book this design</button></a>
+</section>
+
+<section class="image-section">
+  <img src="images/1000085163.jpg" alt="Design 3">
+  <a href="contact.html"><button>Book this design</button></a>
+</section>
+
+<!-- Add more sections as needed -->
+
+<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <span class="close" onclick="lightbox.classList.remove('open')">&times;</span>
+  <span class="arrow left" onclick="prevImage()">&#10094;</span>
   <img id="lb-img" src="" alt="Full size">
+  <span class="arrow right" onclick="nextImage()">&#10095;</span>
 </div>
 
 <script>
-const images = document.querySelectorAll('.grid img');
+// Lightbox
+const sections = document.querySelectorAll('.image-section img');
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
+let currentIndex = 0;
 
-images.forEach(img=>{
-  img.addEventListener('click', ()=>{
-    lbImg.src = img.src;
-    lightbox.classList.add('open');
+sections.forEach((img,index)=>{
+  img.addEventListener('click',()=>{
+    currentIndex = index;
+    showImage();
   });
+});
+
+function showImage(){
+  lbImg.src = sections[currentIndex].src;
+  lightbox.classList.add('open');
+}
+
+function nextImage(){
+  currentIndex = (currentIndex + 1) % sections.length;
+  showImage();
+}
+
+function prevImage(){
+  currentIndex = (currentIndex - 1 + sections.length) % sections.length;
+  showImage();
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape') lightbox.classList.remove('open');
+  if(e.key==='ArrowRight' && lightbox.classList.contains('open')) nextImage();
+  if(e.key==='ArrowLeft' && lightbox.classList.contains('open')) prevImage();
+});
+</script>
+
+<!-- Language toggle -->
+<script>
+const langToggle = document.getElementById('langToggle');
+const navLinks = document.querySelectorAll('nav a');
+let isAlbanian = false;
+
+const translations = {
+  "Tattoos": "Tatuazhe",
+  "My Designs": "Dizajnet e mia",
+  "Contact": "Kontakt",
+  "Book this design": "Rezervo dizajn"
+};
+
+langToggle.addEventListener('click', ()=>{
+  isAlbanian = !isAlbanian;
+  navLinks[0].textContent = isAlbanian ? translations["Tattoos"] : "Tattoos";
+  navLinks[1].textContent = isAlbanian ? translations["My Designs"] : "My Designs";
+  navLinks[2].textContent = isAlbanian ? translations["Contact"] : "Contact";
+  document.querySelectorAll('section.image-section button').forEach(btn=>{
+    btn.textContent = isAlbanian ? translations["Book this design"] : "Book this design";
+  });
+  langToggle.textContent = isAlbanian ? "EN" : "AL";
 });
 </script>
 
 </body>
 </html>
-
