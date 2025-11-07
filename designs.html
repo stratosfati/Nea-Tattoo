@@ -2,160 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo - Designs</title>
 <style>
-* { box-sizing: border-box; margin:0; padding:0; }
-
 :root {
-  --bg: #ffffff;
-  --text: #111111;
-  --button-bg: #111111;
-  --button-text: #ffffff;
+  --bg-body: #ffffff;
+  --text-body: #111111;
+  --bg-header: rgba(255,255,255,0.95);
+  --text-header: #111111;
+  --btn-bg: #111111;
+  --btn-text: #ffffff;
 }
 body.dark {
-  --bg: #111111;
-  --text: #f5f5f5;
-  --button-bg: #f5f5f5;
-  --button-text: #111111;
+  --bg-body: #111111;
+  --text-body: #f5f5f5;
+  --bg-header: #111111;
+  --text-header: #f5f5f5;
+  --btn-bg: #f5f5f5;
+  --btn-text: #111111;
 }
 
-body {
-  font-family: sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s, color 0.3s;
-  padding-top: 160px; /* space for fixed header */
-}
+* { box-sizing:border-box;margin:0;padding:0; }
+body { font-family:sans-serif; background: var(--bg-body); color: var(--text-body); padding-top:160px; transition: all 0.3s; }
 
 /* Header */
-header {
-  width: 100%;
-  position: fixed;
+header{
+  width:100%;
+  position:fixed;
   top:0;
   left:0;
-  background: rgba(255,255,255,0.95);
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0 10px;
-}
-.header-main {
-  width: 100%;
-  max-width: 650px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-header h1 a {
-  text-decoration: none;
-  color: var(--text);
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-.toggle {
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  transition: background 0.2s, color 0.2s;
-}
-.toggle:hover { opacity: 0.8; }
-
-/* Navigation below header */
-nav {
-  margin-top: 15px;
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-nav a {
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 600;
-  font-size: 1rem;
-}
-nav a:hover { transform: scale(1.05); transition:0.2s; }
-
-/* Grid layout */
-.grid {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 0 20px 40px;
-  max-width: 650px;
-  margin: 0 auto;
-}
-.grid div {
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--bg);
-  box-shadow: 0 0 8px rgba(0,0,0,0.08);
-}
-.grid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.grid img:hover { transform: scale(1.02); }
-.grid button {
-  padding: 12px;
-  border: none;
-  background: var(--button-bg);
-  color: var(--button-text);
-  cursor: pointer;
-  font-weight: 700;
-  width: 100%;
-  font-size: 1rem;
-  border-radius: 0 0 12px 12px;
+  background: var(--bg-header);
+  z-index:50;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 0 10px;
   transition: background 0.3s, color 0.3s;
 }
+.header-main{
+  width:100%;
+  max-width:650px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+}
+header h1 a { text-decoration:none; color: var(--text-header); font-size:1.8rem; font-weight:bold; transition: color 0.3s; }
+.controls { display:flex; gap:10px; }
+.toggle{
+  cursor:pointer;
+  font-size:1rem;
+  font-weight:bold;
+  padding:4px 10px;
+  border-radius:8px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border:none;
+  transition: all 0.3s;
+}
+.toggle:hover { opacity:0.8; }
+
+nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
+nav a { text-decoration:none; color: var(--text-header); font-weight:600; font-size:1rem; transition: color 0.3s; }
+
+/* Grid layout */
+.grid { display:flex; flex-direction:column; gap:25px; padding:0 20px 40px; max-width:650px; margin:0 auto; }
+.grid div { border-radius:12px; overflow:hidden; background: var(--bg-body); box-shadow:0 0 8px rgba(0,0,0,0.08); transition: background 0.3s; }
+.grid img { width:100%; height:auto; display:block; cursor:pointer; transition:transform 0.2s; }
+.grid img:hover { transform: scale(1.02); }
+button { padding:12px; border:none; background: var(--btn-bg); color: var(--btn-text); cursor:pointer; font-weight:700; width:100%; font-size:1rem; border-radius:0 0 12px 12px; transition: all 0.3s; }
 
 /* Lightbox */
-.lightbox {
-  position: fixed;
-  inset:0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  flex-direction: column;
-  padding: 20px;
-}
-.lightbox.open { display: flex; }
+.lightbox { position: fixed; inset:0; background: rgba(0,0,0,0.9); display: none; align-items:center; justify-content:center; z-index:100; flex-direction:column; padding:20px; }
+.lightbox.open { display:flex; }
 .lightbox img { max-width:90%; max-height:80%; border-radius:12px; }
-.lightbox .controls {
-  margin-top: 20px;
-  display: flex;
-  gap: 20px;
-}
-.lightbox .ctrl-btn {
-  background: none;
-  border: 2px solid white;
-  color: white;
-  font-size: 1.2rem;
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+.lightbox .controls { margin-top:20px; display:flex; gap:20px; }
+.lightbox .ctrl-btn{ background:none; border:2px solid white; color:white; font-size:1.2rem; padding:6px 12px; border-radius:8px; cursor:pointer; transition:0.2s; }
 .lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
+/* Responsive */
 @media(max-width:480px){
-  header h1 a { font-size:1.5rem; }
-  nav { gap:12px; font-size:0.9rem; }
-  .grid { gap:15px; }
+  header h1 a{ font-size:1.5rem; }
+  nav{ gap:12px; font-size:0.9rem; }
 }
 </style>
 </head>
@@ -164,7 +93,7 @@ nav a:hover { transform: scale(1.05); transition:0.2s; }
 <header>
   <div class="header-main">
     <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div style="display:flex; gap:10px;">
+    <div class="controls">
       <button id="langToggle" class="toggle">AL</button>
       <button id="themeToggle" class="toggle">☀️</button>
     </div>
@@ -200,7 +129,6 @@ const images = Array.from(document.querySelectorAll('.grid img'));
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
 let currentIndex = 0;
-
 images.forEach((img,i)=>{
   img.addEventListener('click',()=>{
     currentIndex=i;
@@ -208,7 +136,6 @@ images.forEach((img,i)=>{
     lightbox.classList.add('open');
   });
 });
-
 document.getElementById('next').addEventListener('click',()=>{
   currentIndex=(currentIndex+1)%images.length;
   lbImg.src=images[currentIndex].src;
@@ -222,33 +149,39 @@ document.getElementById('close').addEventListener('click',()=>{
 });
 
 // Language toggle
-const langToggle=document.getElementById('langToggle');
-const navLinks=document.querySelectorAll('nav a');
-const sectionEl = document.querySelector('section h2');
-let isAlbanian=false;
-
+const langToggle = document.getElementById('langToggle');
+const navLinks = document.querySelectorAll('nav a');
+let lang = localStorage.getItem('lang') || 'en';
+function applyLanguage(){
+  if(lang==='sq'){
+    navLinks[0].textContent='Tatuazhet';
+    navLinks[1].textContent='Dizajnet e Mia';
+    navLinks[2].textContent='Kontakti';
+    langToggle.textContent='EN';
+  } else {
+    navLinks[0].textContent='Tattoos';
+    navLinks[1].textContent='My Designs';
+    navLinks[2].textContent='Contact';
+    langToggle.textContent='AL';
+  }
+}
+applyLanguage();
 langToggle.addEventListener('click',()=>{
-  isAlbanian=!isAlbanian;
-  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
-  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"My Designs";
-  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
-  sectionEl.textContent = isAlbanian?"Dizajnet e Mia":"Available Designs";
-  langToggle.textContent = isAlbanian?"EN":"AL";
+  lang = lang==='en'?'sq':'en';
+  localStorage.setItem('lang',lang);
+  applyLanguage();
 });
 
-// Dark/light mode toggle with persistence
+// Dark/light toggle
 const themeToggle = document.getElementById('themeToggle');
-function applyTheme(dark){
-  document.body.classList.toggle('dark', dark);
-  themeToggle.textContent = dark ? '🌙' : '☀️';
-  localStorage.setItem('darkMode', dark);
-}
-const savedDark = localStorage.getItem('darkMode') === 'true';
-applyTheme(savedDark);
-
-themeToggle.addEventListener('click', ()=>{
-  const dark = !document.body.classList.contains('dark');
-  applyTheme(dark);
+let dark = localStorage.getItem('darkMode')==='true';
+document.body.classList.toggle('dark',dark);
+themeToggle.textContent = dark ? '🌙':'☀️';
+themeToggle.addEventListener('click',()=>{
+  dark = !dark;
+  document.body.classList.toggle('dark',dark);
+  localStorage.setItem('darkMode',dark);
+  themeToggle.textContent = dark ? '🌙':'☀️';
 });
 </script>
 
