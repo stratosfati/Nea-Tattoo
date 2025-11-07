@@ -5,71 +5,97 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-  font-family: sans-serif;
-  background: white;
-  color: #111;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-  padding: 20px;
-}
+  body {
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+  }
 
-/* Language toggle in top-right */
-#langToggle {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: #111;
-  color: white;
-  transition: background 0.2s;
-}
-#langToggle:hover { background: #333; }
+  :root {
+    --bg: #ffffff;
+    --text: #111111;
+    --button-bg: #111111;
+    --button-text: #ffffff;
+  }
+  body.dark {
+    --bg: #111111;
+    --text: #f5f5f5;
+    --button-bg: #f5f5f5;
+    --button-text: #111111;
+  }
 
-/* Main content */
-main h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
-}
+  /* Top right controls */
+  .controls {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  .toggle {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    transition: background 0.2s, color 0.2s;
+    border: none;
+  }
+  .toggle:hover {
+    opacity: 0.8;
+  }
 
-main a {
-  display: block;
-  width: 220px;
-  padding: 18px;
-  margin: 15px auto;
-  background: #111;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  border-radius: 10px;
-  transition: transform 0.2s;
-}
-main a:hover { transform: scale(1.05); }
+  /* Main */
+  main h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+  }
 
-@media(max-width:600px){
-  #langToggle{ font-size:0.9rem; padding:3px 8px; }
-  main h2{ font-size:1.6rem; margin-bottom:30px; }
-  main a{ width:160px; padding:14px; font-size:0.9rem; }
-}
+  main a {
+    display: block;
+    width: 220px;
+    padding: 18px;
+    margin: 15px auto;
+    background: var(--button-bg);
+    color: var(--button-text);
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 10px;
+    transition: transform 0.2s, background 0.3s, color 0.3s;
+  }
+
+  main a:hover { transform: scale(1.05); }
+
+  @media (max-width:600px){
+    .toggle { font-size:0.9rem; padding:3px 8px; }
+    main h2 { font-size:1.6rem; margin-bottom:30px; }
+    main a { width:160px; padding:14px; font-size:0.9rem; }
+  }
 </style>
 </head>
 <body>
 
-<div id="langToggle">AL</div>
+<!-- Controls -->
+<div class="controls">
+  <button id="langToggle" class="toggle">AL</button>
+  <button id="themeToggle" class="toggle">☀️</button>
+</div>
 
+<!-- Main content -->
 <main>
   <h2 id="title">Nea Tattoo</h2>
-
   <a href="tattoos.html" id="tattoos-btn">Tattoos</a>
   <a href="designs.html" id="designs-btn">My Designs</a>
   <a href="contact.html" id="contact-btn">Contact</a>
@@ -77,28 +103,37 @@ main a:hover { transform: scale(1.05); }
 
 <script>
 let lang = 'en';
+let dark = false;
 
 const title = document.getElementById('title');
 const tattoosBtn = document.getElementById('tattoos-btn');
 const designsBtn = document.getElementById('designs-btn');
 const contactBtn = document.getElementById('contact-btn');
+const langToggle = document.getElementById('langToggle');
+const themeToggle = document.getElementById('themeToggle');
 
-document.getElementById('langToggle').addEventListener('click', ()=>{
-  if(lang==='en'){
-    title.textContent = 'Nea Tattoo';
+// Language toggle
+langToggle.addEventListener('click', ()=>{
+  if(lang === 'en'){
     tattoosBtn.textContent = 'Tatuazhet';
     designsBtn.textContent = 'Dizajnet e Mia';
     contactBtn.textContent = 'Kontakti';
-    lang='sq';
-    document.getElementById('langToggle').textContent='EN';
+    langToggle.textContent = 'EN';
+    lang = 'sq';
   } else {
-    title.textContent = 'Nea Tattoo';
     tattoosBtn.textContent = 'Tattoos';
     designsBtn.textContent = 'My Designs';
     contactBtn.textContent = 'Contact';
-    lang='en';
-    document.getElementById('langToggle').textContent='AL';
+    langToggle.textContent = 'AL';
+    lang = 'en';
   }
+});
+
+// Dark/light mode toggle
+themeToggle.addEventListener('click', ()=>{
+  dark = !dark;
+  document.body.classList.toggle('dark', dark);
+  themeToggle.textContent = dark ? '🌙' : '☀️';
 });
 </script>
 
