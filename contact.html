@@ -2,89 +2,116 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo - Contact</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:sans-serif;color:#111;background:white;}
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  font-family: sans-serif;
+  background: white;
+  color: #111;
+  min-height: 100vh;
+  padding-top: 160px; /* space for fixed header */
+  transition: background 0.3s, color 0.3s;
+}
 
 /* Header */
-header{
-  width:100%;
-  position:fixed;
-  top:0;
-  left:0;
-  background:rgba(255,255,255,0.95);
-  z-index:50;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-  display:flex;
-  justify-content:flex-end;
-  padding:15px 20px;
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0.95);
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 10px;
 }
-#langToggle{
-  cursor:pointer;
-  font-size:1rem;
-  font-weight:bold;
-  padding:4px 10px;
-  border-radius:8px;
-  background:#111;
-  color:white;
-  transition:0.2s;
+
+.header-main {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
 }
-#langToggle:hover{background:#333;}
+
+#langToggle, #modeToggle {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  transition: 0.2s;
+}
+#langToggle:hover, #modeToggle:hover { background:#333; }
 
 /* Navigation below header */
-nav{
-  margin-top:90px;
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  flex-wrap:wrap;
+nav {
+  margin-top: 15px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-nav a{text-decoration:none;color:#111;font-weight:600;font-size:1rem;}
-nav a:hover{transform:scale(1.05);transition:0.2s;}
+nav a { text-decoration:none; color:#111; font-weight:600; font-size:1rem; }
+nav a:hover { transform: scale(1.05); transition:0.2s; }
 
 /* Contact section */
-section{
-  max-width:600px;
-  margin:150px auto 20px auto; /* pushes content below header */
-  text-align:center;
-  padding:20px;
+section {
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+  padding: 20px;
 }
-section h2{margin-bottom:20px;font-size:2rem;}
-section p{margin-bottom:12px;font-size:1rem;}
-section a{color:#111;text-decoration:underline;}
+section h2 { margin-bottom:20px; font-size:2rem; }
+section p { margin-bottom:12px; font-size:1rem; }
+section a { color:inherit; text-decoration:underline; }
 
-/* Map container */
-.map-container{
-  width:100%;
-  max-width:600px;
-  height:300px;
-  min-height:250px;
-  margin:20px auto;
-  border-radius:12px;
-  overflow:hidden;
+/* Map */
+.map-container {
+  width: 100%;
+  max-width: 600px;
+  height: 300px;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
 }
+
+/* Dark mode */
+body.dark { background:#111; color:#fff; }
+body.dark nav a { color:#fff; }
+body.dark #langToggle, body.dark #modeToggle { background:#fff; color:#111; }
+body.dark #langToggle:hover, body.dark #modeToggle:hover { background:#ccc; }
 
 @media(max-width:480px){
-  nav{gap:15px;}
-  section{margin-top:130px;}
-  .map-container{height:250px;}
-  #langToggle{font-size:0.9rem;padding:3px 8px;}
+  nav{ gap:15px; }
+  section{ margin-top:20px; }
+  .map-container{ height:250px; }
+  #langToggle,#modeToggle{ font-size:0.9rem; padding:3px 8px; }
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div id="langToggle">AL</div>
+  <div class="header-main">
+    <div id="langToggle">AL</div>
+    <div id="modeToggle">🌙</div>
+  </div>
+  <nav>
+    <a href="tattoos.html">Tattoos</a>
+    <a href="designs.html">My Designs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
-
-<nav>
-  <a href="tattoos.html">Tattoos</a>
-  <a href="designs.html">My Designs</a>
-  <a href="contact.html">Contact</a>
-</nav>
 
 <section>
   <h2>Contact</h2>
@@ -109,7 +136,6 @@ let isAlbanian = false;
 
 langToggle.addEventListener('click', ()=>{
   isAlbanian = !isAlbanian;
-
   navLinks[0].textContent = isAlbanian ? 'Tatuazhet' : 'Tattoos';
   navLinks[1].textContent = isAlbanian ? 'Dizajnet e Mia' : 'My Designs';
   navLinks[2].textContent = isAlbanian ? 'Kontakti' : 'Contact';
@@ -121,6 +147,13 @@ langToggle.addEventListener('click', ()=>{
   section.querySelectorAll('p')[3].textContent = isAlbanian ? 'Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️' : 'DM me on Instagram or use email/phone to book a design ❤️';
 
   langToggle.textContent = isAlbanian ? 'EN' : 'AL';
+});
+
+// Dark/light mode toggle
+const modeToggle = document.getElementById('modeToggle');
+modeToggle.addEventListener('click', ()=>{
+  document.body.classList.toggle('dark');
+  modeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 });
 </script>
 
