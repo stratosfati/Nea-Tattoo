@@ -5,85 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo</title>
 <style>
-* { box-sizing:border-box; margin:0; padding:0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --button-bg: #111111;
+  --button-text: #ffffff;
+}
+body.dark {
+  --bg: #111111;
+  --text: #f5f5f5;
+  --button-bg: #f5f5f5;
+  --button-text: #111111;
+}
 
 body {
   font-family: sans-serif;
-  background: white;
-  color: #111;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   min-height: 100vh;
-  padding-top: 160px; /* space for fixed header */
+  padding: 20px;
   transition: background 0.3s, color 0.3s;
 }
 
-/* Dark mode variables */
-body.dark {
-  background:#111;
-  color:#fff;
-}
-
-/* Header */
-header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(255,255,255,0.95);
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+/* Top-right controls */
+.controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0 10px;
-}
-
-.header-main {
-  width: 100%;
-  max-width: 650px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   gap: 10px;
-  padding: 0 20px;
 }
-
-#langToggle, #themeToggle {
+.toggle {
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
   padding: 4px 10px;
   border-radius: 8px;
-  background: #111;
-  color: white;
+  background: var(--button-bg);
+  color: var(--button-text);
   transition: 0.2s;
   border: none;
 }
-body.dark #langToggle, body.dark #themeToggle {
-  background: white;
-  color: #111;
-}
-#langToggle:hover, #themeToggle:hover { opacity:0.8; }
-
-/* Navigation */
-nav {
-  margin-top: 15px;
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-nav a {
-  text-decoration:none;
-  color: inherit;
-  font-weight:600;
-  font-size:1rem;
-}
-nav a:hover { transform: scale(1.05); transition:0.2s; }
+.toggle:hover { opacity: 0.8; }
 
 /* Main content */
-main {
-  text-align: center;
-}
 main h2 {
   font-size: 2.2rem;
   margin-bottom: 40px;
@@ -93,36 +65,28 @@ main a {
   width: 220px;
   padding: 18px;
   margin: 15px auto;
-  background: #111;
-  color: white;
+  background: var(--button-bg);
+  color: var(--button-text);
   text-decoration: none;
   font-weight: 700;
   border-radius: 10px;
   transition: transform 0.2s, background 0.3s, color 0.3s;
 }
-body.dark main a { background:white; color:#111; }
 main a:hover { transform: scale(1.05); }
 
-@media(max-width:600px){
-  #langToggle,#themeToggle{ font-size:0.9rem; padding:3px 8px; }
-  main h2{ font-size:1.6rem; margin-bottom:30px; }
-  main a{ width:160px; padding:14px; font-size:0.9rem; }
+@media (max-width:600px){
+  .toggle { font-size:0.9rem; padding:3px 8px; }
+  main h2 { font-size:1.6rem; margin-bottom:30px; }
+  main a { width:160px; padding:14px; font-size:0.9rem; }
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-main">
-    <div id="langToggle">AL</div>
-    <div id="themeToggle">☀️</div>
-  </div>
-  <nav>
-    <a href="tattoos.html">Tattoos</a>
-    <a href="designs.html">My Designs</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+<div class="controls">
+  <button id="langToggle" class="toggle">AL</button>
+  <button id="themeToggle" class="toggle">☀️</button>
+</div>
 
 <main>
   <h2 id="title">Nea Tattoo</h2>
@@ -132,30 +96,44 @@ main a:hover { transform: scale(1.05); }
 </main>
 
 <script>
-// Language toggle
+// Elements
 const langToggle = document.getElementById('langToggle');
-const navLinks = document.querySelectorAll('nav a');
+const themeToggle = document.getElementById('themeToggle');
+const bodyEl = document.body;
 const tattoosBtn = document.getElementById('tattoos-btn');
 const designsBtn = document.getElementById('designs-btn');
 const contactBtn = document.getElementById('contact-btn');
-let isAlbanian = false;
 
-langToggle.addEventListener('click', ()=>{
-  isAlbanian = !isAlbanian;
-  navLinks[0].textContent = isAlbanian ? 'Tatuazhet' : 'Tattoos';
-  navLinks[1].textContent = isAlbanian ? 'Dizajnet e Mia' : 'My Designs';
-  navLinks[2].textContent = isAlbanian ? 'Kontakti' : 'Contact';
-  tattoosBtn.textContent = isAlbanian ? 'Tatuazhet' : 'Tattoos';
-  designsBtn.textContent = isAlbanian ? 'Dizajnet e Mia' : 'My Designs';
-  contactBtn.textContent = isAlbanian ? 'Kontakti' : 'Contact';
-  langToggle.textContent = isAlbanian ? 'EN' : 'AL';
+let lang = 'en';
+
+// Load saved theme
+if(localStorage.getItem('darkMode') === 'true'){
+  bodyEl.classList.add('dark');
+  themeToggle.textContent = '🌙';
+}
+
+// Theme toggle
+themeToggle.addEventListener('click', ()=>{
+  const isDark = bodyEl.classList.toggle('dark');
+  localStorage.setItem('darkMode', isDark);
+  themeToggle.textContent = isDark ? '🌙' : '☀️';
 });
 
-// Dark/light mode toggle
-const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click', ()=>{
-  document.body.classList.toggle('dark');
-  themeToggle.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
+// Language toggle
+langToggle.addEventListener('click', ()=>{
+  if(lang==='en'){
+    tattoosBtn.textContent = 'Tatuazhet';
+    designsBtn.textContent = 'Dizajnet e Mia';
+    contactBtn.textContent = 'Kontakti';
+    langToggle.textContent = 'EN';
+    lang='sq';
+  } else {
+    tattoosBtn.textContent = 'Tattoos';
+    designsBtn.textContent = 'My Designs';
+    contactBtn.textContent = 'Contact';
+    langToggle.textContent = 'AL';
+    lang='en';
+  }
 });
 </script>
 
