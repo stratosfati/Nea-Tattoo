@@ -10,16 +10,17 @@
   --text: #111111;
   --button-bg: #111111;
   --button-text: #ffffff;
+  --nav-link: #111111;
 }
 body.dark {
   --bg: #111111;
   --text: #ffffff;
   --button-bg: #ffffff;
   --button-text: #111111;
+  --nav-link: #ffffff;
 }
 
 * { box-sizing: border-box; margin:0; padding:0; }
-
 body {
   font-family: sans-serif;
   background: var(--bg);
@@ -49,7 +50,13 @@ header {
   align-items:center;
   padding:0 20px;
 }
-.header-main a { text-decoration:none; font-size:1.8rem; font-weight:bold; color: var(--text); transition: color 0.3s; }
+.header-main a {
+  text-decoration:none;
+  font-size:1.8rem;
+  font-weight:bold;
+  color: var(--text);
+  transition: color 0.3s;
+}
 .controls {
   display:flex;
   gap:10px;
@@ -74,12 +81,18 @@ nav {
   justify-content:center;
   flex-wrap:wrap;
 }
-nav a { text-decoration:none; font-weight:600; font-size:1rem; color: var(--text); transition: color 0.3s; }
+nav a { 
+  text-decoration:none;
+  font-weight:600;
+  font-size:1rem;
+  color: var(--nav-link);
+  transition: color 0.3s;
+}
 nav a:hover { transform: scale(1.05); transition:0.2s; }
 
 /* Tattoo gallery */
 main { display:flex; flex-direction:column; align-items:center; gap:30px; padding:0 20px; }
-main h2 { margin-bottom:25px; text-align:center; }
+main h2 { margin-bottom:25px; text-align:center; color: var(--text); transition: color 0.3s; }
 .tattoo-gallery { display:flex; flex-direction:column; gap:30px; align-items:center; width:100%; }
 .tattoo-gallery img { width:90%; max-width:500px; height:auto; border-radius:12px; cursor:pointer; transition:0.2s; }
 .tattoo-gallery img:hover { transform:scale(1.02); }
