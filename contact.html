@@ -2,29 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nea Tattoo - Contact</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  transition: background 0.3s, color 0.3s;
+}
 
-:root {
+/* Theme variables */
+:root{
   --bg: #ffffff;
   --text: #111111;
   --header-bg: rgba(255,255,255,0.95);
-  --section-bg: rgba(255,255,255,0.95);
-  --button-bg: #111111;
-  --button-text: #ffffff;
+  --section-bg: #ffffff;
+  --button-bg: #111;
+  --button-text: #fff;
 }
-body.dark {
-  --bg: #111111;
-  --text: #f5f5f5;
+body.dark{
+  --bg:#111111;
+  --text:#f5f5f5;
   --header-bg: rgba(0,0,0,0.95);
-  --section-bg: rgba(0,0,0,0.95);
+  --section-bg: #111;
   --button-bg: #f5f5f5;
-  --button-text: #111111;
+  --button-text: #111;
 }
-
-body { font-family:sans-serif;color:var(--text);background:var(--bg); transition: background 0.3s, color 0.3s; padding-top:160px; }
 
 /* Header */
 header{
@@ -36,17 +41,47 @@ header{
   z-index:50;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
   display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:15px 0 10px;
+}
+
+/* Header main row */
+.header-main{
+  width:100%;
+  max-width:650px;
+  display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px;
-  transition: background 0.3s;
+  padding:0 20px;
 }
-header h1 a { text-decoration:none; color: var(--text); font-size:1.8rem; font-weight:bold; transition: color 0.3s; }
 
-.controls { display:flex; gap:10px; }
-button { cursor:pointer; font-weight:bold; padding:4px 10px; border-radius:8px; border:none; background: var(--button-bg); color: var(--button-text); transition: all 0.3s; }
-button:hover { opacity:0.8; }
+.header-main h1 a{
+  text-decoration:none;
+  color: var(--text);
+  font-size:1.8rem;
+  font-weight:bold;
+}
 
+.controls{
+  display:flex;
+  gap:10px;
+}
+
+.controls button{
+  cursor:pointer;
+  font-size:1rem;
+  font-weight:bold;
+  padding:4px 10px;
+  border-radius:8px;
+  border:none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  transition: background 0.2s, color 0.2s;
+}
+.controls button:hover{opacity:0.8;}
+
+/* Navigation */
 nav{
   margin-top:15px;
   display:flex;
@@ -54,13 +89,18 @@ nav{
   justify-content:center;
   flex-wrap:wrap;
 }
-nav a{text-decoration:none;color:var(--text);font-weight:600;font-size:1rem;transition:color 0.3s;}
+nav a{
+  text-decoration:none;
+  color: var(--text);
+  font-weight:600;
+  font-size:1rem;
+}
 nav a:hover{transform:scale(1.05);transition:0.2s;}
 
-/* Contact section */
+/* Section */
 section{
   max-width:600px;
-  margin:40px auto 20px auto;
+  margin:140px auto 20px auto;
   text-align:center;
   padding:20px;
   background: var(--section-bg);
@@ -81,10 +121,10 @@ section a{color:var(--text);text-decoration:underline;}
   border-radius:12px;
   overflow:hidden;
 }
-.map-container iframe{width:100%; height:100%; border:0;}
+
 @media(max-width:480px){
   nav{gap:15px;}
-  section{margin-top:20px;}
+  section{margin-top:120px;}
   #langToggle,#themeToggle{font-size:0.9rem;padding:3px 8px;}
 }
 </style>
@@ -92,18 +132,19 @@ section a{color:var(--text);text-decoration:underline;}
 <body>
 
 <header>
-  <h1><a href="index.html">Nea Tattoo</a></h1>
-  <div class="controls">
-    <button id="langToggle">AL</button>
-    <button id="themeToggle">☀️</button>
+  <div class="header-main">
+    <h1><a href="index.html">Nea Tattoo</a></h1>
+    <div class="controls">
+      <button id="langToggle">AL</button>
+      <button id="themeToggle">☀️</button>
+    </div>
   </div>
+  <nav>
+    <a href="tattoos.html">Tattoos</a>
+    <a href="designs.html">Designs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
-
-<nav>
-  <a href="tattoos.html">Tattoos</a>
-  <a href="designs.html">Designs</a>
-  <a href="contact.html">Contact</a>
-</nav>
 
 <section>
   <h2>Contact</h2>
@@ -115,44 +156,42 @@ section a{color:var(--text);text-decoration:underline;}
 
 <div class="map-container">
   <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2960.442238794119!2d21.161291!3d42.6548504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135499fec5ba1681%3A0xe3288ef893f8497f!2sEqrem%20%C3%87abej%2C%20Prishtina!5e0!3m2!1sen!2ske!4v1699279185948!5m2!1sen!2ske"
-    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.9945159327877!2d21.161291!3d42.6548504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135499fec5ba1681%3A0xe3288ef893f8497f!2sEqrem%20%C3%87abej%2C%20Prishtina!5e0!3m2!1sen!2s!4v1699330712345!5m2!1sen!2s"
+    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
   </iframe>
 </div>
 
 <script>
-// Language toggle
-const langToggle=document.getElementById('langToggle');
-const navLinks=document.querySelectorAll('nav a');
-const section=document.querySelector('section');
-let isAlbanian=false;
-langToggle.addEventListener('click',()=>{
-  isAlbanian=!isAlbanian;
-  navLinks[0].textContent = isAlbanian ? 'Tatuazhet':'Tattoos';
-  navLinks[1].textContent = isAlbanian ? 'Dizajnet e Mia':'Designs';
-  navLinks[2].textContent = isAlbanian ? 'Kontakti':'Contact';
-  const ps = section.querySelectorAll('p');
-  ps[0].innerHTML = isAlbanian ? 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>':'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>';
-  ps[1].innerHTML = isAlbanian ? 'Telefon/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>':'Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>';
-  ps[2].innerHTML = isAlbanian ? 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>':'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>';
-  ps[3].textContent = isAlbanian ? 'Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️':'DM me on Instagram or use email/phone to book a design ❤️';
-  langToggle.textContent = isAlbanian?'EN':'AL';
+// Persistent theme
+let dark = localStorage.getItem('dark') === 'true';
+const body = document.body;
+const themeToggle = document.getElementById('themeToggle');
+if(dark) body.classList.add('dark');
+themeToggle.textContent = dark ? '🌙' : '☀️';
+
+// Theme toggle
+themeToggle.addEventListener('click', ()=>{
+  dark = !dark;
+  body.classList.toggle('dark', dark);
+  themeToggle.textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('dark', dark);
 });
 
-// Dark/light mode global
-const themeToggle=document.getElementById('themeToggle');
-if(localStorage.getItem('darkMode')==='true'){
-  document.body.classList.add('dark');
-  themeToggle.textContent='🌙';
-} else {
-  document.body.classList.remove('dark');
-  themeToggle.textContent='☀️';
-}
-themeToggle.addEventListener('click',()=>{
-  const isDark=!document.body.classList.contains('dark');
-  document.body.classList.toggle('dark', isDark);
-  themeToggle.textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('darkMode', isDark);
+// Language toggle
+let isAlbanian = false;
+const langToggle = document.getElementById('langToggle');
+const navLinks = document.querySelectorAll('nav a');
+const sectionP = document.querySelectorAll('section p');
+langToggle.addEventListener('click', ()=>{
+  isAlbanian = !isAlbanian;
+  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
+  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"Designs";
+  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
+  sectionP[0].innerHTML = isAlbanian ? 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>' : 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>';
+  sectionP[1].innerHTML = isAlbanian ? 'Telefon/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>' : 'Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>';
+  sectionP[2].innerHTML = isAlbanian ? 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>' : 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>';
+  sectionP[3].textContent = isAlbanian ? 'Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️' : 'DM me on Instagram or use email/phone to book a design ❤️';
+  langToggle.textContent = isAlbanian ? 'EN' : 'AL';
 });
 </script>
 
