@@ -2,43 +2,161 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nea Tattoo - Designs</title>
 <style>
 * { box-sizing: border-box; margin:0; padding:0; }
-:root {
-  --bg:#ffffff; --text:#111111; --button-bg:#111; --button-text:#fff;
-}
-body.dark { --bg:#111; --text:#f5f5f5; --button-bg:#f5f5f5; --button-text:#111; }
 
-body { font-family:sans-serif; background:var(--bg); color:var(--text); padding-top:160px; transition:0.3s; }
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --button-bg: #111111;
+  --button-text: #ffffff;
+}
+body.dark {
+  --bg: #111111;
+  --text: #f5f5f5;
+  --button-bg: #f5f5f5;
+  --button-text: #111111;
+}
+
+body {
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  padding-top: 160px; /* space for fixed header */
+}
 
 /* Header */
-header { width:100%; position:fixed; top:0; left:0; background:rgba(255,255,255,0.95); z-index:50; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; padding:20px 0 10px; transition:0.3s;}
-.header-main { width:100%; max-width:650px; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
-header h1 a { text-decoration:none; color:var(--text); font-size:1.8rem; font-weight:bold; transition:color 0.3s; }
-#langToggle { cursor:pointer; font-size:1rem; font-weight:bold; padding:4px 10px; border-radius:8px; background:var(--button-bg); color:var(--button-text); transition:0.3s; }
-#langToggle:hover { background:#333; }
-nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
-nav a { text-decoration:none; color:var(--text); font-weight:600; font-size:1rem; transition:color 0.3s; }
-nav a:hover{transform:scale(1.05);}
+header {
+  width: 100%;
+  position: fixed;
+  top:0;
+  left:0;
+  background: rgba(255,255,255,0.95);
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 10px;
+}
+.header-main {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+header h1 a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.toggle {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+.toggle:hover { opacity: 0.8; }
+
+/* Navigation below header */
+nav {
+  margin-top: 15px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+}
+nav a:hover { transform: scale(1.05); transition:0.2s; }
 
 /* Grid layout */
-.grid { display:flex; flex-direction:column; gap:25px; padding:0 20px 40px; max-width:650px; margin:0 auto; }
-.grid div { border-radius:12px; overflow:hidden; background:var(--bg); box-shadow:0 0 8px rgba(0,0,0,0.08); transition:0.3s;}
-.grid img { width:100%; height:auto; display:block; cursor:pointer; transition:transform 0.2s; }
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 0 20px 40px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.grid div {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: 0 0 8px rgba(0,0,0,0.08);
+}
+.grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 .grid img:hover { transform: scale(1.02); }
-button { padding:12px; border:none; background:var(--button-bg); color:var(--button-text); cursor:pointer; font-weight:700; width:100%; font-size:1rem; border-radius:0 0 12px 12px; transition:0.3s; }
+.grid button {
+  padding: 12px;
+  border: none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  font-weight: 700;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 0 0 12px 12px;
+  transition: background 0.3s, color 0.3s;
+}
 
 /* Lightbox */
-.lightbox { position: fixed; inset:0; background: rgba(0,0,0,0.9); display: none; align-items:center; justify-content:center; z-index:100; flex-direction:column; padding:20px; }
-.lightbox.open { display:flex; }
+.lightbox {
+  position: fixed;
+  inset:0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  flex-direction: column;
+  padding: 20px;
+}
+.lightbox.open { display: flex; }
 .lightbox img { max-width:90%; max-height:80%; border-radius:12px; }
-.lightbox .controls { margin-top:20px; display:flex; gap:20px; }
-.lightbox .ctrl-btn { background:none; border:2px solid white; color:white; font-size:1.2rem; padding:6px 12px; border-radius:8px; cursor:pointer; transition:0.2s; }
+.lightbox .controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+.lightbox .ctrl-btn {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
 .lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
-@media(max-width:480px){ header h1 a{ font-size:1.5rem; } nav{ gap:12px; font-size:0.9rem; } }
+@media(max-width:480px){
+  header h1 a { font-size:1.5rem; }
+  nav { gap:12px; font-size:0.9rem; }
+  .grid { gap:15px; }
+}
 </style>
 </head>
 <body>
@@ -46,88 +164,8 @@ button { padding:12px; border:none; background:var(--button-bg); color:var(--but
 <header>
   <div class="header-main">
     <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div class="controls">
-      <button id="langToggle">AL</button>
-      <button id="themeToggle">☀️</button>
+    <div style="display:flex; gap:10px;">
+      <button id="langToggle" class="toggle">AL</button>
+      <button id="themeToggle" class="toggle">☀️</button>
     </div>
   </div>
-  <nav>
-    <a href="tattoos.html">Tattoos</a>
-    <a href="designs.html">My Designs</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
-
-<section>
-  <h2 style="text-align:center;margin-bottom:25px;">Available Designs</h2>
-  <div class="grid">
-    <div><img src="images/FLASH 1.jpg" alt="Design 1"><a href="contact.html"><button>Book this design</button></a></div>
-    <div><img src="images/1000085207.jpg" alt="Design 2"><a href="contact.html"><button>Book this design</button></a></div>
-    <div><img src="images/1000085163.jpg" alt="Design 3"><a href="contact.html"><button>Book this design</button></a></div>
-  </div>
-</section>
-
-<div class="lightbox" id="lightbox">
-  <img id="lb-img" src="" alt="Full size">
-  <div class="controls">
-    <button id="prev" class="ctrl-btn">←</button>
-    <button id="next" class="ctrl-btn">→</button>
-    <button id="close" class="ctrl-btn">✕</button>
-  </div>
-</div>
-
-<script>
-// Language toggle
-const langToggle = document.getElementById('langToggle');
-const themeToggle = document.getElementById('themeToggle');
-const navLinks = document.querySelectorAll('nav a');
-let isAlbanian=false;
-
-// Load saved theme
-if(localStorage.getItem('darkMode')==='true'){
-  document.body.classList.add('dark');
-  themeToggle.textContent='🌙';
-}
-
-// Theme toggle
-themeToggle.addEventListener('click', ()=>{
-  const isDark = document.body.classList.toggle('dark');
-  localStorage.setItem('darkMode', isDark);
-  themeToggle.textContent = isDark ? '🌙' : '☀️';
-});
-
-// Language toggle
-langToggle.addEventListener('click',()=>{
-  isAlbanian=!isAlbanian;
-  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
-  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"My Designs";
-  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
-  langToggle.textContent = isAlbanian?"EN":"AL";
-});
-
-// Lightbox
-const images = Array.from(document.querySelectorAll('.grid img'));
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lb-img');
-let currentIndex = 0;
-
-images.forEach((img,i)=>{
-  img.addEventListener('click',()=>{
-    currentIndex=i;
-    lbImg.src=img.src;
-    lightbox.classList.add('open');
-  });
-});
-document.getElementById('next').addEventListener('click',()=>{
-  currentIndex=(currentIndex+1)%images.length;
-  lbImg.src=images[currentIndex].src;
-});
-document.getElementById('prev').addEventListener('click',()=>{
-  currentIndex=(currentIndex-1+images.length)%images.length;
-  lbImg.src=images[currentIndex].src;
-});
-document.getElementById('close').addEventListener('click',()=>{ lightbox.classList.remove('open'); });
-</script>
-
-</body>
-</html>
