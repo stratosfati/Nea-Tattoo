@@ -7,61 +7,56 @@
 <style>
 * { box-sizing: border-box; margin:0; padding:0; }
 
-:root {
-  --bg: #ffffff;
-  --text: #111111;
-  --header-bg: rgba(255,255,255,0.95);
-  --button-bg: #111111;
-  --button-text: #ffffff;
-}
-
-body.dark {
-  --bg: #111111;
-  --text: #f5f5f5;
-  --header-bg: #111111;
-  --button-bg: #f5f5f5;
-  --button-text: #111111;
-}
-
 body {
   font-family: sans-serif;
   background: var(--bg);
   color: var(--text);
-  padding-top: 160px; /* space for fixed header */
+  padding-top:160px;
   transition: background 0.3s, color 0.3s;
+}
+
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --header-bg: rgba(255,255,255,0.95);
+  --nav-text: #111111;
+  --button-bg: #111111;
+  --button-text: #ffffff;
+}
+body.dark {
+  --bg: #111111;
+  --text: #f5f5f5;
+  --header-bg: rgba(0,0,0,0.95);
+  --nav-text: #f5f5f5;
+  --button-bg: #f5f5f5;
+  --button-text: #111111;
 }
 
 /* Header */
 header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
   background: var(--header-bg);
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0 10px;
-  transition: background 0.3s;
+  z-index:50;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 0 10px;
 }
 .header-main {
-  width: 100%;
-  max-width: 650px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
+  width:100%;
+  max-width:650px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
 }
-header h1 a {
-  text-decoration:none;
-  color: var(--text);
-  font-size:1.8rem;
-  font-weight:bold;
-  transition: color 0.3s;
-}
-#langToggle, #themeToggle {
+header h1 a { text-decoration:none; color: var(--nav-text); font-size:1.8rem; font-weight:bold; }
+.controls { display:flex; gap:10px; }
+.toggle {
   cursor:pointer;
   font-size:1rem;
   font-weight:bold;
@@ -70,24 +65,13 @@ header h1 a {
   background: var(--button-bg);
   color: var(--button-text);
   border:none;
-  transition: background 0.3s, color 0.3s;
+  transition:0.2s;
 }
-#langToggle:hover, #themeToggle:hover { opacity: 0.8; }
+.toggle:hover { opacity:0.8; }
 
-nav {
-  margin-top:15px;
-  display:flex;
-  gap:25px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-nav a {
-  text-decoration:none;
-  color: var(--text);
-  font-weight:600;
-  font-size:1rem;
-  transition: color 0.3s;
-}
+nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
+nav a { text-decoration:none; color: var(--nav-text); font-weight:600; font-size:1rem; transition:0.3s; }
+nav a:hover { transform:scale(1.05); }
 
 /* Grid layout */
 .grid {
@@ -98,33 +82,11 @@ nav a {
   max-width:650px;
   margin:0 auto;
 }
-.grid div {
-  border-radius:12px;
-  overflow: visible; /* allow buttons to be clickable */
-  background: var(--bg);
-  box-shadow:0 0 8px rgba(0,0,0,0.08);
-  transition: background 0.3s;
-}
-.grid img {
-  width:100%;
-  height:auto;
-  display:block;
-  cursor:pointer;
-  transition:transform 0.2s;
-}
+.grid div { border-radius:12px; overflow:hidden; background: var(--bg); box-shadow:0 0 8px rgba(0,0,0,0.08);}
+.grid img { width:100%; height:auto; display:block; cursor:pointer; transition:transform 0.2s; }
 .grid img:hover { transform: scale(1.02); }
-.grid a button {
-  padding:12px;
-  border:none;
-  background: var(--button-bg);
-  color: var(--button-text);
-  cursor:pointer;
-  font-weight:700;
-  width:100%;
-  font-size:1rem;
-  border-radius:0 0 12px 12px;
-  transition: background 0.3s, color 0.3s;
-}
+.grid button { padding:12px; border:none; background: var(--button-bg); color: var(--button-text); cursor:pointer; font-weight:700; width:100%; font-size:1rem; border-radius:0 0 12px 12px; transition:0.3s; }
+.grid button:hover { opacity:0.8; }
 
 /* Lightbox */
 .lightbox {
@@ -140,11 +102,10 @@ nav a {
 }
 .lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
-/* Responsive */
 @media(max-width:480px){
   header h1 a { font-size:1.5rem; }
   nav { gap:12px; font-size:0.9rem; }
-  #langToggle, #themeToggle { font-size:0.9rem; padding:3px 8px; }
+  .grid button { font-size:0.9rem; padding:10px; }
 }
 </style>
 </head>
@@ -153,9 +114,9 @@ nav a {
 <header>
   <div class="header-main">
     <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div>
-      <button id="langToggle">AL</button>
-      <button id="themeToggle">☀️</button>
+    <div class="controls">
+      <button id="langToggle" class="toggle">AL</button>
+      <button id="themeToggle" class="toggle">☀️</button>
     </div>
   </div>
   <nav>
@@ -168,18 +129,9 @@ nav a {
 <section>
   <h2 style="text-align:center;margin-bottom:25px;">Available Designs</h2>
   <div class="grid">
-    <div>
-      <img src="images/FLASH 1.jpg" alt="Design 1">
-      <a href="contact.html"><button>Book this design</button></a>
-    </div>
-    <div>
-      <img src="images/1000085207.jpg" alt="Design 2">
-      <a href="contact.html"><button>Book this design</button></a>
-    </div>
-    <div>
-      <img src="images/1000085163.jpg" alt="Design 3">
-      <a href="contact.html"><button>Book this design</button></a>
-    </div>
+    <div><img src="images/FLASH 1.jpg" alt="Design 1"><button onclick="window.location='contact.html'">Book this design</button></div>
+    <div><img src="images/1000085207.jpg" alt="Design 2"><button onclick="window.location='contact.html'">Book this design</button></div>
+    <div><img src="images/1000085163.jpg" alt="Design 3"><button onclick="window.location='contact.html'">Book this design</button></div>
   </div>
 </section>
 
@@ -193,57 +145,63 @@ nav a {
 </div>
 
 <script>
-// Lightbox
+// Load dark mode from localStorage
+if(localStorage.getItem('darkMode')==='true'){
+  document.body.classList.add('dark');
+  document.getElementById('themeToggle').textContent='🌙';
+}
+
+// Grid lightbox
 const images = Array.from(document.querySelectorAll('.grid img'));
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
-let currentIndex = 0;
+let currentIndex=0;
 
 images.forEach((img,i)=>{
-  img.addEventListener('click',()=>{
+  img.addEventListener('click', ()=>{
     currentIndex=i;
     lbImg.src=img.src;
     lightbox.classList.add('open');
   });
 });
-document.getElementById('next').addEventListener('click',()=>{
+
+document.getElementById('next').addEventListener('click', ()=>{
   currentIndex=(currentIndex+1)%images.length;
   lbImg.src=images[currentIndex].src;
 });
-document.getElementById('prev').addEventListener('click',()=>{
+document.getElementById('prev').addEventListener('click', ()=>{
   currentIndex=(currentIndex-1+images.length)%images.length;
   lbImg.src=images[currentIndex].src;
 });
-document.getElementById('close').addEventListener('click',()=>{
+document.getElementById('close').addEventListener('click', ()=>{
   lightbox.classList.remove('open');
 });
 
 // Language toggle
-const langToggle = document.getElementById('langToggle');
-const navLinks = document.querySelectorAll('nav a');
-let isAlbanian=false;
-langToggle.addEventListener('click',()=>{
-  isAlbanian=!isAlbanian;
-  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
-  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"Designs";
-  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
-  langToggle.textContent = isAlbanian?"EN":"AL";
+let lang='en';
+const navLinks=document.querySelectorAll('nav a');
+document.getElementById('langToggle').addEventListener('click', ()=>{
+  if(lang==='en'){
+    navLinks[0].textContent='Tatuazhet';
+    navLinks[1].textContent='Dizajnet';
+    navLinks[2].textContent='Kontakti';
+    lang='sq';
+    document.getElementById('langToggle').textContent='EN';
+  } else {
+    navLinks[0].textContent='Tattoos';
+    navLinks[1].textContent='Designs';
+    navLinks[2].textContent='Contact';
+    lang='en';
+    document.getElementById('langToggle').textContent='AL';
+  }
 });
 
-// Dark mode shared across pages
-const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click',()=>{
-  const dark = !document.body.classList.contains('dark');
-  document.body.classList.toggle('dark', dark);
-  themeToggle.textContent = dark ? '🌙' : '☀️';
-  localStorage.setItem('darkMode', dark);
+// Dark/light mode toggle
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  const isDark=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode',isDark);
+  document.getElementById('themeToggle').textContent=isDark?'🌙':'☀️';
 });
-
-// Apply stored dark mode on load
-if(localStorage.getItem('darkMode')==='true'){
-  document.body.classList.add('dark');
-  themeToggle.textContent='🌙';
-}
 </script>
 
 </body>
