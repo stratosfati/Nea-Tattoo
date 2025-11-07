@@ -5,11 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo - Tattoos</title>
 <style>
-* { box-sizing:border-box;margin:0;padding:0; }
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-top:160px;
+  transition: background 0.3s, color 0.3s;
+}
+
 :root {
   --bg: #ffffff;
   --text: #111111;
   --header-bg: rgba(255,255,255,0.95);
+  --nav-text: #111111;
   --button-bg: #111111;
   --button-text: #ffffff;
 }
@@ -17,11 +27,10 @@ body.dark {
   --bg: #111111;
   --text: #f5f5f5;
   --header-bg: rgba(0,0,0,0.95);
+  --nav-text: #f5f5f5;
   --button-bg: #f5f5f5;
   --button-text: #111111;
 }
-
-body { font-family:sans-serif; color: var(--text); background: var(--bg); transition: background 0.3s, color 0.3s; padding-top:160px; }
 
 /* Header */
 header {
@@ -36,15 +45,33 @@ header {
   flex-direction:column;
   align-items:center;
   padding:20px 0 10px;
-  transition: background 0.3s;
 }
-.header-main { width:100%; max-width:650px; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
-header h1 a { text-decoration:none;color: var(--text); font-size:1.8rem;font-weight:bold; transition: color 0.3s; }
-#langToggle, #themeToggle { cursor:pointer;font-size:1rem;font-weight:bold;padding:4px 10px;border-radius:8px;background: var(--button-bg); color: var(--button-text); transition: all 0.3s; border:none; }
-#langToggle:hover,#themeToggle:hover { opacity:0.8; }
+.header-main {
+  width:100%;
+  max-width:650px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+}
+header h1 a { text-decoration:none; color: var(--nav-text); font-size:1.8rem; font-weight:bold; }
+.controls { display:flex; gap:10px; }
+.toggle {
+  cursor:pointer;
+  font-size:1rem;
+  font-weight:bold;
+  padding:4px 10px;
+  border-radius:8px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border:none;
+  transition:0.2s;
+}
+.toggle:hover { opacity:0.8; }
 
 nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
-nav a { text-decoration:none; color: var(--text); font-weight:600; font-size:1rem; transition: color 0.3s; }
+nav a { text-decoration:none; color: var(--nav-text); font-weight:600; font-size:1rem; transition:0.3s; }
+nav a:hover { transform:scale(1.05); }
 
 /* Tattoo gallery */
 main { display:flex; flex-direction:column; align-items:center; gap:30px; padding:0 20px; }
@@ -65,7 +92,7 @@ main h2 { margin-bottom:25px; text-align:center; }
   header h1 a{font-size:1.5rem;}
   nav{gap:15px;}
   .prev,.next{font-size:1.5rem;}
-  #langToggle,#themeToggle{font-size:0.9rem;padding:3px 8px;}
+  .toggle{font-size:0.9rem;padding:3px 8px;}
 }
 </style>
 </head>
@@ -74,9 +101,9 @@ main h2 { margin-bottom:25px; text-align:center; }
 <header>
   <div class="header-main">
     <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div>
-      <button id="langToggle">AL</button>
-      <button id="themeToggle">☀️</button>
+    <div class="controls">
+      <button id="langToggle" class="toggle">AL</button>
+      <button id="themeToggle" class="toggle">☀️</button>
     </div>
   </div>
   <nav>
@@ -111,45 +138,59 @@ main h2 { margin-bottom:25px; text-align:center; }
 </div>
 
 <script>
-// Lightbox
-const images=document.querySelectorAll('.tattoo-gallery img');
-const lightbox=document.getElementById('lightbox');
-const lightboxImage=document.getElementById('lightboxImage');
-const closeBtn=document.getElementById('closeBtn');
-const nextBtn=document.getElementById('nextBtn');
-const prevBtn=document.getElementById('prevBtn');
-let currentIndex=0;
-images.forEach((img,index)=>{img.addEventListener('click',()=>{lightbox.style.display='flex';lightboxImage.src=img.src;currentIndex=index;});});
-closeBtn.addEventListener('click',()=>{lightbox.style.display='none';});
-nextBtn.addEventListener('click',()=>{currentIndex=(currentIndex+1)%images.length;lightboxImage.src=images[currentIndex].src;});
-prevBtn.addEventListener('click',()=>{currentIndex=(currentIndex-1+images.length)%images.length;lightboxImage.src=images[currentIndex].src;});
-
-// Language toggle
-const langToggle=document.getElementById('langToggle');
-const navLinks=document.querySelectorAll('nav a');
-let isAlbanian=false;
-langToggle.addEventListener('click',()=>{
-  isAlbanian=!isAlbanian;
-  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
-  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"Designs";
-  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
-  langToggle.textContent = isAlbanian?"EN":"AL";
-});
-
-// Dark/light mode
-const themeToggle=document.getElementById('themeToggle');
+// Load dark mode from localStorage
 if(localStorage.getItem('darkMode')==='true'){
   document.body.classList.add('dark');
-  themeToggle.textContent='🌙';
-} else {
-  document.body.classList.remove('dark');
-  themeToggle.textContent='☀️';
+  document.getElementById('themeToggle').textContent='🌙';
 }
-themeToggle.addEventListener('click',()=>{
-  const isDark = !document.body.classList.contains('dark');
-  document.body.classList.toggle('dark', isDark);
-  themeToggle.textContent = isDark ? '🌙' : '☀️';
-  localStorage.setItem('darkMode', isDark);
+
+const images = document.querySelectorAll('.tattoo-gallery img');
+const lightbox = document.getElementById('lightbox');
+const lbImage = document.getElementById('lightboxImage');
+let currentIndex=0;
+
+images.forEach((img,index)=>{
+  img.addEventListener('click', ()=>{
+    currentIndex=index;
+    lbImage.src=img.src;
+    lightbox.style.display='flex';
+  });
+});
+
+document.getElementById('closeBtn').addEventListener('click', ()=>{ lightbox.style.display='none'; });
+document.getElementById('nextBtn').addEventListener('click', ()=>{
+  currentIndex=(currentIndex+1)%images.length;
+  lbImage.src=images[currentIndex].src;
+});
+document.getElementById('prevBtn').addEventListener('click', ()=>{
+  currentIndex=(currentIndex-1+images.length)%images.length;
+  lbImage.src=images[currentIndex].src;
+});
+
+// Language toggle
+let lang='en';
+const navLinks=document.querySelectorAll('nav a');
+document.getElementById('langToggle').addEventListener('click', ()=>{
+  if(lang==='en'){
+    navLinks[0].textContent='Tatuazhet';
+    navLinks[1].textContent='Dizajnet';
+    navLinks[2].textContent='Kontakti';
+    lang='sq';
+    document.getElementById('langToggle').textContent='EN';
+  } else {
+    navLinks[0].textContent='Tattoos';
+    navLinks[1].textContent='Designs';
+    navLinks[2].textContent='Contact';
+    lang='en';
+    document.getElementById('langToggle').textContent='AL';
+  }
+});
+
+// Dark/light mode toggle
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  const isDark=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode',isDark);
+  document.getElementById('themeToggle').textContent=isDark?'🌙':'☀️';
 });
 </script>
 
