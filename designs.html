@@ -2,185 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo - Designs</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
+* { box-sizing: border-box; margin:0; padding:0; }
 :root {
-  --bg-color: white;
-  --text-color: #111;
-  --card-bg: #fff;
-  --btn-bg: #111;
-  --btn-text: white;
+  --bg:#ffffff; --text:#111111; --button-bg:#111; --button-text:#fff;
 }
+body.dark { --bg:#111; --text:#f5f5f5; --button-bg:#f5f5f5; --button-text:#111; }
 
-body.dark {
-  --bg-color: #111;
-  --text-color: #f5f5f5;
-  --card-bg: #1a1a1a;
-  --btn-bg: #f5f5f5;
-  --btn-text: #111;
-}
-
-body {
-  font-family: sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
-  padding-top: 160px;
-  transition: background 0.3s, color 0.3s;
-}
+body { font-family:sans-serif; background:var(--bg); color:var(--text); padding-top:160px; transition:0.3s; }
 
 /* Header */
-header {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: var(--bg-color);
-  z-index: 50;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0 10px;
-  transition: background 0.3s;
-}
+header { width:100%; position:fixed; top:0; left:0; background:rgba(255,255,255,0.95); z-index:50; box-shadow:0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; align-items:center; padding:20px 0 10px; transition:0.3s;}
+.header-main { width:100%; max-width:650px; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
+header h1 a { text-decoration:none; color:var(--text); font-size:1.8rem; font-weight:bold; transition:color 0.3s; }
+#langToggle { cursor:pointer; font-size:1rem; font-weight:bold; padding:4px 10px; border-radius:8px; background:var(--button-bg); color:var(--button-text); transition:0.3s; }
+#langToggle:hover { background:#333; }
+nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
+nav a { text-decoration:none; color:var(--text); font-weight:600; font-size:1rem; transition:color 0.3s; }
+nav a:hover{transform:scale(1.05);}
 
-.header-main {
-  width: 100%;
-  max-width: 650px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-header h1 a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-
-.toggles {
-  display: flex;
-  gap: 10px;
-}
-
-.toggle-btn {
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  border: none;
-  transition: 0.2s;
-}
-.toggle-btn:hover {
-  opacity: 0.8;
-}
-
-nav {
-  margin-top: 15px;
-  display: flex;
-  gap: 25px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-nav a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-/* Grid */
-.grid {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  padding: 0 20px 40px;
-  max-width: 650px;
-  margin: 0 auto;
-}
-.grid div {
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--card-bg);
-  box-shadow: 0 0 8px rgba(0,0,0,0.08);
-  transition: background 0.3s;
-}
-.grid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.grid img:hover {
-  transform: scale(1.02);
-}
-button {
-  padding: 12px;
-  border: none;
-  background: var(--btn-bg);
-  color: var(--btn-text);
-  cursor: pointer;
-  font-weight: 700;
-  width: 100%;
-  font-size: 1rem;
-  border-radius: 0 0 12px 12px;
-  transition: 0.3s;
-}
-button:hover {
-  opacity: 0.9;
-}
+/* Grid layout */
+.grid { display:flex; flex-direction:column; gap:25px; padding:0 20px 40px; max-width:650px; margin:0 auto; }
+.grid div { border-radius:12px; overflow:hidden; background:var(--bg); box-shadow:0 0 8px rgba(0,0,0,0.08); transition:0.3s;}
+.grid img { width:100%; height:auto; display:block; cursor:pointer; transition:transform 0.2s; }
+.grid img:hover { transform: scale(1.02); }
+button { padding:12px; border:none; background:var(--button-bg); color:var(--button-text); cursor:pointer; font-weight:700; width:100%; font-size:1rem; border-radius:0 0 12px 12px; transition:0.3s; }
 
 /* Lightbox */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  flex-direction: column;
-  padding: 20px;
-}
-.lightbox.open { display: flex; }
-.lightbox img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 12px;
-}
-.lightbox .controls {
-  margin-top: 20px;
-  display: flex;
-  gap: 20px;
-}
-.lightbox .ctrl-btn {
-  background: none;
-  border: 2px solid white;
-  color: white;
-  font-size: 1.2rem;
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.lightbox .ctrl-btn:hover {
-  background: rgba(255,255,255,0.2);
-}
+.lightbox { position: fixed; inset:0; background: rgba(0,0,0,0.9); display: none; align-items:center; justify-content:center; z-index:100; flex-direction:column; padding:20px; }
+.lightbox.open { display:flex; }
+.lightbox img { max-width:90%; max-height:80%; border-radius:12px; }
+.lightbox .controls { margin-top:20px; display:flex; gap:20px; }
+.lightbox .ctrl-btn { background:none; border:2px solid white; color:white; font-size:1.2rem; padding:6px 12px; border-radius:8px; cursor:pointer; transition:0.2s; }
+.lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
-/* Responsive */
-@media(max-width:480px){
-  header h1 a { font-size: 1.5rem; }
-  nav { gap: 12px; font-size: 0.9rem; }
-}
+@media(max-width:480px){ header h1 a{ font-size:1.5rem; } nav{ gap:12px; font-size:0.9rem; } }
 </style>
 </head>
 <body>
@@ -188,9 +46,9 @@ button:hover {
 <header>
   <div class="header-main">
     <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div class="toggles">
-      <button id="themeToggle" class="toggle-btn">☀️</button>
-      <button id="langToggle" class="toggle-btn">AL</button>
+    <div class="controls">
+      <button id="langToggle">AL</button>
+      <button id="themeToggle">☀️</button>
     </div>
   </div>
   <nav>
@@ -209,7 +67,6 @@ button:hover {
   </div>
 </section>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <img id="lb-img" src="" alt="Full size">
   <div class="controls">
@@ -220,6 +77,34 @@ button:hover {
 </div>
 
 <script>
+// Language toggle
+const langToggle = document.getElementById('langToggle');
+const themeToggle = document.getElementById('themeToggle');
+const navLinks = document.querySelectorAll('nav a');
+let isAlbanian=false;
+
+// Load saved theme
+if(localStorage.getItem('darkMode')==='true'){
+  document.body.classList.add('dark');
+  themeToggle.textContent='🌙';
+}
+
+// Theme toggle
+themeToggle.addEventListener('click', ()=>{
+  const isDark = document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode', isDark);
+  themeToggle.textContent = isDark ? '🌙' : '☀️';
+});
+
+// Language toggle
+langToggle.addEventListener('click',()=>{
+  isAlbanian=!isAlbanian;
+  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
+  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"My Designs";
+  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
+  langToggle.textContent = isAlbanian?"EN":"AL";
+});
+
 // Lightbox
 const images = Array.from(document.querySelectorAll('.grid img'));
 const lightbox = document.getElementById('lightbox');
@@ -233,7 +118,6 @@ images.forEach((img,i)=>{
     lightbox.classList.add('open');
   });
 });
-
 document.getElementById('next').addEventListener('click',()=>{
   currentIndex=(currentIndex+1)%images.length;
   lbImg.src=images[currentIndex].src;
@@ -242,29 +126,7 @@ document.getElementById('prev').addEventListener('click',()=>{
   currentIndex=(currentIndex-1+images.length)%images.length;
   lbImg.src=images[currentIndex].src;
 });
-document.getElementById('close').addEventListener('click',()=>{
-  lightbox.classList.remove('open');
-});
-
-// Language toggle
-const langToggle = document.getElementById('langToggle');
-const navLinks = document.querySelectorAll('nav a');
-let isAlbanian=false;
-langToggle.addEventListener('click',()=>{
-  isAlbanian=!isAlbanian;
-  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
-  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"My Designs";
-  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
-  document.querySelector('h2').textContent = isAlbanian?"Dizajnet e Disponueshme":"Available Designs";
-  langToggle.textContent = isAlbanian?"EN":"AL";
-});
-
-// Theme toggle
-const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('click',()=>{
-  document.body.classList.toggle('dark');
-  themeToggle.textContent = document.body.classList.contains('dark') ? '🌙' : '☀️';
-});
+document.getElementById('close').addEventListener('click',()=>{ lightbox.classList.remove('open'); });
 </script>
 
 </body>
