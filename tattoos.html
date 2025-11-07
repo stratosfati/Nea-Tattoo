@@ -5,64 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo - Tattoos</title>
 <style>
-* { box-sizing:border-box; margin:0; padding:0; }
+* { box-sizing: border-box; margin:0; padding:0; }
 
 :root {
-  --bg:#ffffff; --text:#111111; --button-bg:#111; --button-text:#ffffff;
+  --bg: #ffffff;
+  --text: #111111;
+  --button-bg: #111111;
+  --button-text: #ffffff;
 }
-body.dark { --bg:#111; --text:#f5f5f5; --button-bg:#f5f5f5; --button-text:#111; }
+body.dark {
+  --bg: #111111;
+  --text: #f5f5f5;
+  --button-bg: #f5f5f5;
+  --button-text: #111111;
+}
 
 body {
-  font-family:sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  padding-top:160px;
-  transition:0.3s;
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  padding-top: 160px; /* space for fixed header */
 }
 
 /* Header */
 header {
-  width:100%;
-  position:fixed;
+  width: 100%;
+  position: fixed;
   top:0;
   left:0;
-  background:rgba(255,255,255,0.95);
-  z-index:50;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px 0 10px;
-  transition:0.3s;
+  background: rgba(255,255,255,0.95);
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0 10px;
 }
-.header-main { width:100%; max-width:650px; display:flex; justify-content:space-between; align-items:center; padding:0 20px; }
-header h1 a { text-decoration:none; color:var(--text); font-size:1.8rem; font-weight:bold; transition:color 0.3s; }
-.controls { display:flex; gap:10px; }
-button { cursor:pointer; font-size:1rem; font-weight:bold; padding:4px 10px; border-radius:8px; border:none; background:var(--button-bg); color:var(--button-text); transition:0.3s; }
-button:hover { opacity:0.8; }
-nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
-nav a { text-decoration:none; color:var(--text); font-weight:600; font-size:1rem; transition:color 0.3s; }
-nav a:hover{transform:scale(1.05);}
+.header-main {
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+header h1 a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.toggle {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+.toggle:hover { opacity: 0.8; }
+
+/* Navigation below header */
+nav {
+  margin-top: 15px;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+}
+nav a:hover { transform: scale(1.05); transition:0.2s; }
 
 /* Tattoo gallery */
-main { display:flex; flex-direction:column; align-items:center; gap:30px; padding:0 20px; }
-main h2 { margin-bottom:25px; text-align:center; }
-.tattoo-gallery { display:flex; flex-direction:column; gap:30px; align-items:center; width:100%; }
-.tattoo-gallery img { width:90%; max-width:500px; height:auto; border-radius:12px; cursor:pointer; transition:0.2s; }
-.tattoo-gallery img:hover { transform:scale(1.02); }
+.tattoo-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 0 20px 40px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.tattoo-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.tattoo-gallery img:hover { transform: scale(1.02); }
 
 /* Lightbox */
-.lightbox { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; flex-direction:column; }
+.lightbox {
+  position: fixed;
+  inset:0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  flex-direction: column;
+  padding: 20px;
+}
+.lightbox.open { display: flex; }
 .lightbox img { max-width:90%; max-height:80%; border-radius:12px; }
-.close, .prev, .next { position:absolute; color:white; font-size:2rem; cursor:pointer; user-select:none; }
-.close { top:20px; right:30px; }
-.prev, .next { top:50%; transform:translateY(-50%); padding:10px; }
-.prev { left:30px; } .next { right:30px; }
+.lightbox .controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+.lightbox .ctrl-btn {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  font-size: 1.2rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
 @media(max-width:480px){
-  header h1 a{font-size:1.5rem;}
-  nav{gap:15px;}
-  .prev,.next{font-size:1.5rem;}
+  header h1 a { font-size:1.5rem; }
+  nav { gap:12px; font-size:0.9rem; }
 }
 </style>
 </head>
@@ -71,9 +145,9 @@ main h2 { margin-bottom:25px; text-align:center; }
 <header>
   <div class="header-main">
     <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div class="controls">
-      <button id="langToggle">AL</button>
-      <button id="themeToggle">☀️</button>
+    <div style="display:flex; gap:10px;">
+      <button id="langToggle" class="toggle">AL</button>
+      <button id="themeToggle" class="toggle">☀️</button>
     </div>
   </div>
   <nav>
@@ -84,7 +158,7 @@ main h2 { margin-bottom:25px; text-align:center; }
 </header>
 
 <main>
-  <h2>Tattoos</h2>
+  <h2 style="text-align:center;margin-bottom:25px;">Tattoos</h2>
   <div class="tattoo-gallery">
     <img src="images/macat.jpg" alt="Tattoo 1">
     <img src="images/alien man.jpg" alt="Tattoo 2">
@@ -101,67 +175,69 @@ main h2 { margin-bottom:25px; text-align:center; }
 </main>
 
 <div class="lightbox" id="lightbox">
-  <span class="close" id="closeBtn">&times;</span>
-  <span class="prev" id="prevBtn">&#10094;</span>
-  <img id="lightboxImage" src="">
-  <span class="next" id="nextBtn">&#10095;</span>
+  <img id="lb-img" src="" alt="Full size">
+  <div class="controls">
+    <button id="prev" class="ctrl-btn">←</button>
+    <button id="next" class="ctrl-btn">→</button>
+    <button id="close" class="ctrl-btn">✕</button>
+  </div>
 </div>
 
 <script>
-// Elements
-const langToggle = document.getElementById('langToggle');
-const themeToggle = document.getElementById('themeToggle');
-const bodyEl = document.body;
-const navLinks = document.querySelectorAll('nav a');
-
-const images = document.querySelectorAll('.tattoo-gallery img');
+// Lightbox
+const images = Array.from(document.querySelectorAll('.tattoo-gallery img'));
 const lightbox = document.getElementById('lightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const closeBtn = document.getElementById('closeBtn');
-const nextBtn = document.getElementById('nextBtn');
-const prevBtn = document.getElementById('prevBtn');
-
+const lbImg = document.getElementById('lb-img');
 let currentIndex = 0;
-let isAlbanian=false;
 
-// Load saved theme
-if(localStorage.getItem('darkMode') === 'true'){
-  bodyEl.classList.add('dark');
-  themeToggle.textContent='🌙';
-}
+images.forEach((img,i)=>{
+  img.addEventListener('click',()=>{
+    currentIndex=i;
+    lbImg.src=img.src;
+    lightbox.classList.add('open');
+  });
+});
 
-// Theme toggle
-themeToggle.addEventListener('click', ()=>{
-  const isDark = bodyEl.classList.toggle('dark');
-  localStorage.setItem('darkMode', isDark);
-  themeToggle.textContent = isDark ? '🌙' : '☀️';
+document.getElementById('next').addEventListener('click',()=>{
+  currentIndex=(currentIndex+1)%images.length;
+  lbImg.src=images[currentIndex].src;
+});
+document.getElementById('prev').addEventListener('click',()=>{
+  currentIndex=(currentIndex-1+images.length)%images.length;
+  lbImg.src=images[currentIndex].src;
+});
+document.getElementById('close').addEventListener('click',()=>{
+  lightbox.classList.remove('open');
 });
 
 // Language toggle
-langToggle.addEventListener('click', ()=>{
+const langToggle=document.getElementById('langToggle');
+const navLinks=document.querySelectorAll('nav a');
+const mainTitle=document.querySelector('main h2');
+let isAlbanian=false;
+
+langToggle.addEventListener('click',()=>{
   isAlbanian=!isAlbanian;
   navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
   navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"My Designs";
   navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
+  mainTitle.textContent = isAlbanian?"Tatuazhet":"Tattoos";
   langToggle.textContent = isAlbanian?"EN":"AL";
 });
 
-// Lightbox
-images.forEach((img,index)=>{
-  img.addEventListener('click', ()=>{
-    lightbox.style.display='flex';
-    lightboxImage.src=img.src;
-    currentIndex=index;
-  });
-});
-closeBtn.addEventListener('click', ()=>{ lightbox.style.display='none'; });
-nextBtn.addEventListener('click', ()=>{
-  currentIndex=(currentIndex+1)%images.length;
-  lightboxImage.src=images[currentIndex].src;
-});
-prevBtn.addEventListener('click', ()=>{
-  currentIndex=(currentIndex-1+images.length)%images.length;
-  lightboxImage.src=images[currentIndex].src;
+// Dark/light mode toggle with persistence
+const themeToggle = document.getElementById('themeToggle');
+function applyTheme(dark){
+  document.body.classList.toggle('dark', dark);
+  themeToggle.textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('darkMode', dark);
+}
+const savedDark = localStorage.getItem('darkMode') === 'true';
+applyTheme(savedDark);
+
+themeToggle.addEventListener('click', ()=>{
+  const dark = !document.body.classList.contains('dark');
+  applyTheme(dark);
 });
 </script>
 
