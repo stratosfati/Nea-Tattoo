@@ -6,84 +6,103 @@
 <title>Nea Tattoo - Contact</title>
 <style>
 :root {
-  --bg-body: #ffffff;
-  --text-body: #111111;
-  --bg-header: rgba(255,255,255,0.95);
-  --text-header: #111111;
-  --btn-bg: #111111;
-  --btn-text: #ffffff;
-}
-body.dark {
-  --bg-body: #111111;
-  --text-body: #f5f5f5;
-  --bg-header: #111111;
-  --text-header: #f5f5f5;
-  --btn-bg: #f5f5f5;
-  --btn-text: #111111;
+  --bg: #ffffff;
+  --text: #111111;
+  --button-bg: #111111;
+  --button-text: #ffffff;
+  --section-bg: #ffffff;
+  --section-text: #111111;
+  --nav-bg: #ffffff;
+  --nav-text: #111111;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:sans-serif;color:var(--text-body);background:var(--bg-body);transition: all 0.3s;}
+body.dark {
+  --bg: #111111;
+  --text: #f5f5f5;
+  --button-bg: #f5f5f5;
+  --button-text: #111111;
+  --section-bg: #111111;
+  --section-text: #f5f5f5;
+  --nav-bg: #111111;
+  --nav-text: #f5f5f5;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family:sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
 
 /* Header */
-header{
+header {
   width:100%;
   position:fixed;
   top:0;
   left:0;
-  background: var(--bg-header);
+  background: var(--nav-bg);
   z-index:50;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
   display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:20px 0 10px;
-  transition: background 0.3s, color 0.3s;
-}
-.header-main{
-  width:100%;
-  max-width:650px;
-  display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:0 20px;
+  padding:15px 20px;
+  transition: background 0.3s;
 }
-header h1 a { text-decoration:none; color: var(--text-header); font-size:1.8rem; font-weight:bold; transition: color 0.3s; }
+header h1 a {
+  text-decoration:none;
+  color: var(--nav-text);
+  font-weight:bold;
+  font-size:1.8rem;
+  transition: color 0.3s;
+}
 .controls { display:flex; gap:10px; }
-.toggle{
+.toggle {
   cursor:pointer;
   font-size:1rem;
   font-weight:bold;
   padding:4px 10px;
   border-radius:8px;
-  background: var(--btn-bg);
-  color: var(--btn-text);
   border:none;
-  transition: all 0.3s;
+  background: var(--button-bg);
+  color: var(--button-text);
+  transition: background 0.3s, color 0.3s;
 }
 .toggle:hover { opacity:0.8; }
 
-/* Navigation */
-nav{
-  margin-top:15px;
+/* Navigation below header */
+nav {
+  margin-top:80px;
   display:flex;
   gap:25px;
   justify-content:center;
   flex-wrap:wrap;
 }
-nav a{text-decoration:none;color: var(--text-header);font-weight:600;font-size:1rem;transition: color 0.3s;}
-nav a:hover{transform:scale(1.05);transition:0.2s;}
+nav a {
+  text-decoration:none;
+  color: var(--nav-text);
+  font-weight:600;
+  font-size:1rem;
+  transition: color 0.3s;
+}
+nav a:hover { transform:scale(1.05); transition:0.2s; }
 
 /* Contact section */
-section{
+section {
   max-width:600px;
-  margin:150px auto 20px auto; 
+  margin:30px auto 20px auto;
   text-align:center;
   padding:20px;
+  background: var(--section-bg);
+  color: var(--section-text);
+  border-radius:12px;
+  transition: background 0.3s, color 0.3s;
 }
-section h2{margin-bottom:20px;font-size:2rem;}
-section p{margin-bottom:12px;font-size:1rem;}
-section a{color: var(--text-body);text-decoration:underline;transition:color 0.3s;}
+section h2 { margin-bottom:20px; font-size:2rem; }
+section p { margin-bottom:12px; font-size:1rem; }
+section a { color: var(--section-text); text-decoration:underline; }
 
 /* Map container */
 .map-container{
@@ -96,30 +115,29 @@ section a{color: var(--text-body);text-decoration:underline;transition:color 0.3
   overflow:hidden;
 }
 
+/* Responsive */
 @media(max-width:480px){
   nav{gap:15px;}
-  section{margin-top:130px;}
-  .map-container{height:250px;}
-  #langToggle,#themeToggle{font-size:0.9rem;padding:3px 8px;}
+  section{margin-top:20px;}
+  #langToggle, #themeToggle{font-size:0.9rem; padding:3px 8px;}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-main">
-    <h1><a href="index.html">Nea Tattoo</a></h1>
-    <div class="controls">
-      <button id="langToggle" class="toggle">AL</button>
-      <button id="themeToggle" class="toggle">☀️</button>
-    </div>
+  <h1><a href="index.html">Nea Tattoo</a></h1>
+  <div class="controls">
+    <button id="langToggle" class="toggle">AL</button>
+    <button id="themeToggle" class="toggle">☀️</button>
   </div>
-  <nav>
-    <a href="tattoos.html">Tattoos</a>
-    <a href="designs.html">My Designs</a>
-    <a href="contact.html">Contact</a>
-  </nav>
 </header>
+
+<nav>
+  <a href="tattoos.html">Tattoos</a>
+  <a href="designs.html">My Designs</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
 <section>
   <h2>Contact</h2>
@@ -131,7 +149,7 @@ section a{color: var(--text-body);text-decoration:underline;transition:color 0.3
 
 <div class="map-container">
   <iframe
-    src="https://www.google.com/maps/dir//Eqrem+%C3%87abej,+Prishtina+10000/@42.6548209,21.0788903,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x135499fec5ba1681:0xe3288ef893f8497f!2m2!1d21.161291!2d42.6548504?entry=ttu"
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.6466449745955!2d21.161291!3d42.6548504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135499fec5ba1681%3A0xe3288ef893f8497f!2sEqrem%20%C3%87abej%2C%20Prishtina!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
   </iframe>
 </div>
@@ -141,49 +159,39 @@ section a{color: var(--text-body);text-decoration:underline;transition:color 0.3
 const langToggle = document.getElementById('langToggle');
 const navLinks = document.querySelectorAll('nav a');
 const section = document.querySelector('section');
-let lang = localStorage.getItem('lang') || 'en';
+let isAlbanian = false;
 
-function applyLanguage(){
-  if(lang==='sq'){
-    navLinks[0].textContent='Tatuazhet';
-    navLinks[1].textContent='Dizajnet e Mia';
-    navLinks[2].textContent='Kontakti';
-    const ps = section.querySelectorAll('p');
-    ps[0].innerHTML='Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>';
-    ps[1].innerHTML='Telefon/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>';
-    ps[2].innerHTML='Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>';
-    ps[3].textContent='Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️';
-    langToggle.textContent='EN';
-  } else {
-    navLinks[0].textContent='Tattoos';
-    navLinks[1].textContent='My Designs';
-    navLinks[2].textContent='Contact';
-    const ps = section.querySelectorAll('p');
-    ps[0].innerHTML='Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>';
-    ps[1].innerHTML='Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>';
-    ps[2].innerHTML='Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>';
-    ps[3].textContent='DM me on Instagram or use email/phone to book a design ❤️';
-    langToggle.textContent='AL';
-  }
-}
-applyLanguage();
+langToggle.addEventListener('click', ()=>{
+  isAlbanian = !isAlbanian;
 
-langToggle.addEventListener('click',()=>{
-  lang = lang==='en'?'sq':'en';
-  localStorage.setItem('lang',lang);
-  applyLanguage();
+  navLinks[0].textContent = isAlbanian ? 'Tatuazhet' : 'Tattoos';
+  navLinks[1].textContent = isAlbanian ? 'Dizajnet e Mia' : 'My Designs';
+  navLinks[2].textContent = isAlbanian ? 'Kontakti' : 'Contact';
+
+  const p = section.querySelectorAll('p');
+  p[0].innerHTML = isAlbanian ? 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>' : 'Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a>';
+  p[1].innerHTML = isAlbanian ? 'Telefon/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>' : 'Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a>';
+  p[2].innerHTML = isAlbanian ? 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>' : 'Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a>';
+  p[3].textContent = isAlbanian ? 'Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️' : 'DM me on Instagram or use email/phone to book a design ❤️';
+
+  langToggle.textContent = isAlbanian ? 'EN' : 'AL';
 });
 
-// Dark/light toggle
+// Dark/Light mode toggle with localStorage
 const themeToggle = document.getElementById('themeToggle');
-let dark = localStorage.getItem('darkMode')==='true';
-document.body.classList.toggle('dark',dark);
-themeToggle.textContent = dark ? '🌙':'☀️';
-themeToggle.addEventListener('click',()=>{
-  dark = !dark;
-  document.body.classList.toggle('dark',dark);
-  localStorage.setItem('darkMode',dark);
-  themeToggle.textContent = dark ? '🌙':'☀️';
+const body = document.body;
+
+// Load saved theme
+if(localStorage.getItem('theme')==='dark'){
+  body.classList.add('dark');
+  themeToggle.textContent = '🌙';
+}
+
+themeToggle.addEventListener('click', ()=>{
+  body.classList.toggle('dark');
+  const dark = body.classList.contains('dark');
+  themeToggle.textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
 });
 </script>
 
