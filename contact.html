@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nea Tattoo - Contact</title>
+<title>Nea Tattoo - Designs</title>
 <style>
 :root {
   --bg: #ffffff;
@@ -39,10 +39,18 @@ header {
   z-index:50;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
   display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 0 10px;
+  transition: background 0.3s;
+}
+.header-main {
+  width:100%;
+  max-width:650px;
+  display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 20px;
-  transition: background 0.3s;
+  padding:0 20px;
 }
 header h1 a {
   text-decoration:none;
@@ -83,42 +91,94 @@ nav a {
   transition: color 0.3s;
 }
 
-/* Contact section */
-section {
-  max-width:600px;
-  margin:160px auto 20px auto; /* pushes content below header */
+/* Grid layout */
+main {
+  margin-top:160px;
+  padding:0 20px 40px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:30px;
+}
+main h2 {
   text-align:center;
-  padding:20px;
+  margin-bottom:25px;
 }
-section h2 {
-  margin-bottom:20px;
-  font-size:2rem;
-}
-section p {
-  margin-bottom:12px;
-  font-size:1rem;
-}
-section a {
-  color: var(--text);
-  text-decoration:underline;
-  transition: color 0.3s;
-}
-
-/* Map container */
-.map-container {
+.grid {
+  display:flex;
+  flex-direction:column;
+  gap:25px;
   width:100%;
-  max-width:600px;
-  height:300px;
-  min-height:250px;
-  margin:20px auto;
+  max-width:650px;
+}
+.grid div {
   border-radius:12px;
   overflow:hidden;
+  background: var(--bg);
+  box-shadow:0 0 8px rgba(0,0,0,0.08);
+  transition: background 0.3s;
+}
+.grid img {
+  width:100%;
+  height:auto;
+  display:block;
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+.grid img:hover { transform: scale(1.02); }
+.grid button {
+  padding:12px;
+  border:none;
+  background: var(--button-bg);
+  color: var(--button-text);
+  cursor:pointer;
+  font-weight:700;
+  width:100%;
+  font-size:1rem;
+  border-radius:0 0 12px 12px;
+  transition: background 0.3s,color 0.3s;
 }
 
+/* Lightbox */
+.lightbox {
+  display:none;
+  position:fixed;
+  z-index:1000;
+  inset:0;
+  background: rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:20px;
+}
+.lightbox img {
+  max-width:90%;
+  max-height:80%;
+  border-radius:12px;
+}
+.lightbox .controls {
+  margin-top:20px;
+  display:flex;
+  gap:20px;
+}
+.lightbox .ctrl-btn {
+  background:none;
+  border:2px solid white;
+  color:white;
+  font-size:1.2rem;
+  padding:6px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+.lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
+
 @media(max-width:480px){
+  header h1 a{font-size:1.5rem;}
   nav{gap:15px;}
-  section{margin-top:150px;}
-  .map-container{height:250px;}
+  .grid{gap:15px;}
+  .grid button{font-size:0.9rem;padding:10px;}
+  .lightbox .ctrl-btn{font-size:1rem;padding:4px 8px;}
   .toggle{font-size:0.9rem;padding:3px 8px;}
 }
 </style>
@@ -126,32 +186,45 @@ section a {
 <body>
 
 <header>
-  <h1><a href="index.html">Nea Tattoo</a></h1>
-  <div class="controls">
-    <button id="langToggle" class="toggle">AL</button>
-    <button id="themeToggle" class="toggle">☀️</button>
+  <div class="header-main">
+    <h1><a href="index.html">Nea Tattoo</a></h1>
+    <div class="controls">
+      <button id="langToggle" class="toggle">AL</button>
+      <button id="themeToggle" class="toggle">☀️</button>
+    </div>
   </div>
+  <nav>
+    <a href="tattoos.html">Tattoos</a>
+    <a href="designs.html">Designs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
 
-<nav>
-  <a href="tattoos.html">Tattoos</a>
-  <a href="designs.html">Designs</a>
-  <a href="contact.html">Contact</a>
-</nav>
+<main>
+  <h2>Available Designs</h2>
+  <div class="grid">
+    <div>
+      <img src="images/FLASH 1.jpg" alt="Design 1">
+      <a href="contact.html"><button>Book this design</button></a>
+    </div>
+    <div>
+      <img src="images/1000085207.jpg" alt="Design 2">
+      <a href="contact.html"><button>Book this design</button></a>
+    </div>
+    <div>
+      <img src="images/1000085163.jpg" alt="Design 3">
+      <a href="contact.html"><button>Book this design</button></a>
+    </div>
+  </div>
+</main>
 
-<section>
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:neaatattoo@gmail.com">neaatattoo@gmail.com</a></p>
-  <p>Phone/Whatsapp: <a href="tel:+38345832040">+383 45 832 040</a></p>
-  <p>Instagram: <a href="https://instagram.com/neatattooo" target="_blank">@neatattooo</a></p>
-  <p>DM me on Instagram or use email/phone to book a design ❤️</p>
-</section>
-
-<div class="map-container">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2991.642952998483!2d21.161291!3d42.654851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x135499fec5ba1681%3A0xe3288ef893f8497f!2sEqrem%20%C3%87abej%2C%20Prishtina%2010000!5e0!3m2!1sen!2s!4v1699356489330!5m2!1sen!2s"
-    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
+<div class="lightbox" id="lightbox">
+  <img id="lb-img" src="" alt="Full size">
+  <div class="controls">
+    <button id="prev" class="ctrl-btn">←</button>
+    <button id="next" class="ctrl-btn">→</button>
+    <button id="close" class="ctrl-btn">✕</button>
+  </div>
 </div>
 
 <script>
@@ -160,6 +233,7 @@ const themeToggle = document.getElementById('themeToggle');
 let dark = localStorage.getItem('nea_dark') === 'true';
 document.body.classList.toggle('dark', dark);
 themeToggle.textContent = dark ? '🌙' : '☀️';
+
 themeToggle.addEventListener('click', ()=>{
   dark = !dark;
   document.body.classList.toggle('dark', dark);
@@ -171,31 +245,53 @@ themeToggle.addEventListener('click', ()=>{
 const langToggle = document.getElementById('langToggle');
 const navLinks = document.querySelectorAll('nav a');
 let isAlbanian = localStorage.getItem('nea_lang')==='sq';
-const section = document.querySelector('section');
 if(isAlbanian){
   navLinks[0].textContent='Tatuazhet';
   navLinks[1].textContent='Dizajnet';
   navLinks[2].textContent='Kontakti';
-  section.querySelectorAll('p')[3].textContent='Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️';
   langToggle.textContent='EN';
 }
+
 langToggle.addEventListener('click', ()=>{
   isAlbanian = !isAlbanian;
   if(isAlbanian){
     navLinks[0].textContent='Tatuazhet';
     navLinks[1].textContent='Dizajnet';
     navLinks[2].textContent='Kontakti';
-    section.querySelectorAll('p')[3].textContent='Më shkruaj në Instagram ose përdor email/telefon për të rezervuar një dizajn ❤️';
     langToggle.textContent='EN';
     localStorage.setItem('nea_lang','sq');
   } else {
     navLinks[0].textContent='Tattoos';
     navLinks[1].textContent='Designs';
     navLinks[2].textContent='Contact';
-    section.querySelectorAll('p')[3].textContent='DM me on Instagram or use email/phone to book a design ❤️';
     langToggle.textContent='AL';
     localStorage.setItem('nea_lang','en');
   }
+});
+
+// Lightbox
+const images = Array.from(document.querySelectorAll('.grid img'));
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+let currentIndex = 0;
+
+images.forEach((img,i)=>{
+  img.addEventListener('click', ()=>{
+    currentIndex = i;
+    lbImg.src = img.src;
+    lightbox.classList.add('open');
+  });
+});
+document.getElementById('next').addEventListener('click', ()=>{
+  currentIndex = (currentIndex+1) % images.length;
+  lbImg.src = images[currentIndex].src;
+});
+document.getElementById('prev').addEventListener('click', ()=>{
+  currentIndex = (currentIndex-1+images.length) % images.length;
+  lbImg.src = images[currentIndex].src;
+});
+document.getElementById('close').addEventListener('click', ()=>{
+  lightbox.classList.remove('open');
 });
 </script>
 
