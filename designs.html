@@ -169,3 +169,88 @@ nav a:hover { transform: scale(1.05); transition:0.2s; }
       <button id="themeToggle" class="toggle">☀️</button>
     </div>
   </div>
+  <nav>
+    <a href="tattoos.html">Tattoos</a>
+    <a href="designs.html">My Designs</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section>
+  <h2 style="text-align:center;margin-bottom:25px;">Available Designs</h2>
+  <div class="grid">
+    <div><img src="images/FLASH 1.jpg" alt="Design 1"><a href="contact.html"><button>Book this design</button></a></div>
+    <div><img src="images/1000085207.jpg" alt="Design 2"><a href="contact.html"><button>Book this design</button></a></div>
+    <div><img src="images/1000085163.jpg" alt="Design 3"><a href="contact.html"><button>Book this design</button></a></div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <img id="lb-img" src="" alt="Full size">
+  <div class="controls">
+    <button id="prev" class="ctrl-btn">←</button>
+    <button id="next" class="ctrl-btn">→</button>
+    <button id="close" class="ctrl-btn">✕</button>
+  </div>
+</div>
+
+<script>
+// Lightbox
+const images = Array.from(document.querySelectorAll('.grid img'));
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+let currentIndex = 0;
+
+images.forEach((img,i)=>{
+  img.addEventListener('click',()=>{
+    currentIndex=i;
+    lbImg.src=img.src;
+    lightbox.classList.add('open');
+  });
+});
+
+document.getElementById('next').addEventListener('click',()=>{
+  currentIndex=(currentIndex+1)%images.length;
+  lbImg.src=images[currentIndex].src;
+});
+document.getElementById('prev').addEventListener('click',()=>{
+  currentIndex=(currentIndex-1+images.length)%images.length;
+  lbImg.src=images[currentIndex].src;
+});
+document.getElementById('close').addEventListener('click',()=>{
+  lightbox.classList.remove('open');
+});
+
+// Language toggle
+const langToggle=document.getElementById('langToggle');
+const navLinks=document.querySelectorAll('nav a');
+const sectionEl = document.querySelector('section h2');
+let isAlbanian=false;
+
+langToggle.addEventListener('click',()=>{
+  isAlbanian=!isAlbanian;
+  navLinks[0].textContent = isAlbanian?"Tatuazhet":"Tattoos";
+  navLinks[1].textContent = isAlbanian?"Dizajnet e Mia":"My Designs";
+  navLinks[2].textContent = isAlbanian?"Kontakti":"Contact";
+  sectionEl.textContent = isAlbanian?"Dizajnet e Mia":"Available Designs";
+  langToggle.textContent = isAlbanian?"EN":"AL";
+});
+
+// Dark/light mode toggle with persistence
+const themeToggle = document.getElementById('themeToggle');
+function applyTheme(dark){
+  document.body.classList.toggle('dark', dark);
+  themeToggle.textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('darkMode', dark);
+}
+const savedDark = localStorage.getItem('darkMode') === 'true';
+applyTheme(savedDark);
+
+themeToggle.addEventListener('click', ()=>{
+  const dark = !document.body.classList.contains('dark');
+  applyTheme(dark);
+});
+</script>
+
+</body>
+</html>
