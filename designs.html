@@ -2,82 +2,78 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nea Tattoo - Designs</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-top:160px;
+  transition: background 0.3s, color 0.3s;
+}
+
 :root {
   --bg: #ffffff;
   --text: #111111;
+  --header-bg: rgba(255,255,255,0.95);
+  --nav-text: #111111;
   --button-bg: #111111;
   --button-text: #ffffff;
-  --header-bg: rgba(255,255,255,0.95);
 }
 body.dark {
   --bg: #111111;
   --text: #f5f5f5;
+  --header-bg: rgba(0,0,0,0.95);
+  --nav-text: #f5f5f5;
   --button-bg: #f5f5f5;
   --button-text: #111111;
-  --header-bg: rgba(17,17,17,0.95);
-}
-* { box-sizing:border-box; margin:0; padding:0; }
-body {
-  font-family: 'Roboto', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.3s, color 0.3s;
-  padding-top: 120px;
 }
 
 /* Header */
 header {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
+  width:100%;
+  position:fixed;
+  top:0;
+  left:0;
   background: var(--header-bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px 20px 10px;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  z-index:50;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 0 10px;
 }
 .header-main {
-  width: 100%;
-  max-width: 650px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width:100%;
+  max-width:650px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
 }
-header h1 a { text-decoration:none; color: var(--text); font-size: clamp(1.5rem,5vw,1.8rem); font-weight:bold; }
+header h1 a { text-decoration:none; color: var(--nav-text); font-size:1.8rem; font-weight:bold; }
 .controls { display:flex; gap:10px; }
 .toggle {
   cursor:pointer;
-  font-size: clamp(0.9rem,2.5vw,1rem);
+  font-size:1rem;
   font-weight:bold;
-  padding: 4px 10px;
+  padding:4px 10px;
   border-radius:8px;
   background: var(--button-bg);
   color: var(--button-text);
   border:none;
-  transition: 0.2s;
+  transition:0.2s;
 }
-.toggle:hover { opacity:0.85; }
-nav {
-  margin-top:10px;
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-nav a {
-  text-decoration:none;
-  color: var(--text);
-  font-weight:600;
-  font-size: clamp(0.9rem,2.5vw,1rem);
-  transition: color 0.3s;
-}
+.toggle:hover { opacity:0.8; }
 
-/* Grid */
+nav { margin-top:15px; display:flex; gap:25px; justify-content:center; flex-wrap:wrap; }
+nav a { text-decoration:none; color: var(--nav-text); font-weight:600; font-size:1rem; transition:0.3s; }
+nav a:hover { transform:scale(1.05); }
+
+/* Grid layout */
 .grid {
   display:flex;
   flex-direction:column;
@@ -86,50 +82,30 @@ nav a {
   max-width:650px;
   margin:0 auto;
 }
-.grid div {
-  border-radius:12px;
-  overflow:hidden;
-  background: var(--bg);
-  box-shadow:0 0 8px rgba(0,0,0,0.08);
-}
+.grid div { border-radius:12px; overflow:hidden; background: var(--bg); box-shadow:0 0 8px rgba(0,0,0,0.08);}
 .grid img { width:100%; height:auto; display:block; cursor:pointer; transition:transform 0.2s; }
-.grid img:hover { transform:scale(1.02); }
-.grid button {
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:0 0 12px 12px;
-  background: var(--button-bg);
-  color: var(--button-text);
-  font-weight:700;
-  font-size:1rem;
-  cursor:pointer;
-  transition:0.2s;
-}
-.grid button:hover { opacity:0.85; }
+.grid img:hover { transform: scale(1.02); }
+.grid button { padding:12px; border:none; background: var(--button-bg); color: var(--button-text); cursor:pointer; font-weight:700; width:100%; font-size:1rem; border-radius:0 0 12px 12px; transition:0.3s; }
+.grid button:hover { opacity:0.8; }
 
 /* Lightbox */
 .lightbox {
-  display:none;
-  position:fixed;
-  inset:0;
+  position: fixed; inset:0;
   background: rgba(0,0,0,0.9);
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:1000;
-  padding:20px;
+  display: none; align-items:center; justify-content:center; z-index:100; flex-direction:column; padding:20px;
 }
+.lightbox.open { display:flex; }
 .lightbox img { max-width:90%; max-height:80%; border-radius:12px; }
 .lightbox .controls { margin-top:20px; display:flex; gap:20px; }
 .lightbox .ctrl-btn {
-  background:none; border:2px solid white; color:white; font-size:1.2rem;
-  padding:6px 12px; border-radius:8px; cursor:pointer; transition:0.2s;
+  background:none; border:2px solid white; color:white; font-size:1.2rem; padding:6px 12px; border-radius:8px; cursor:pointer; transition:0.2s;
 }
 .lightbox .ctrl-btn:hover { background: rgba(255,255,255,0.2); }
 
 @media(max-width:480px){
-  .prev,.next{font-size:1.5rem;}
+  header h1 a { font-size:1.5rem; }
+  nav { gap:12px; font-size:0.9rem; }
+  .grid button { font-size:0.9rem; padding:10px; }
 }
 </style>
 </head>
@@ -169,61 +145,62 @@ nav a {
 </div>
 
 <script>
+// Load dark mode from localStorage
+if(localStorage.getItem('darkMode')==='true'){
+  document.body.classList.add('dark');
+  document.getElementById('themeToggle').textContent='🌙';
+}
+
+// Grid lightbox
 const images = Array.from(document.querySelectorAll('.grid img'));
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
-let currentIndex = 0;
+let currentIndex=0;
 
 images.forEach((img,i)=>{
-  img.addEventListener('click',()=>{
+  img.addEventListener('click', ()=>{
     currentIndex=i;
     lbImg.src=img.src;
-    lightbox.style.display='flex';
+    lightbox.classList.add('open');
   });
 });
 
-document.getElementById('next').addEventListener('click',()=>{
+document.getElementById('next').addEventListener('click', ()=>{
   currentIndex=(currentIndex+1)%images.length;
   lbImg.src=images[currentIndex].src;
 });
-document.getElementById('prev').addEventListener('click',()=>{
+document.getElementById('prev').addEventListener('click', ()=>{
   currentIndex=(currentIndex-1+images.length)%images.length;
   lbImg.src=images[currentIndex].src;
 });
-document.getElementById('close').addEventListener('click',()=>{
-  lightbox.style.display='none';
+document.getElementById('close').addEventListener('click', ()=>{
+  lightbox.classList.remove('open');
 });
 
-// Language & Dark Mode
-const langToggle=document.getElementById('langToggle');
-const themeToggle=document.getElementById('themeToggle');
-const navLinks=document.querySelectorAll('nav a');
-
+// Language toggle
 let lang='en';
-let dark = localStorage.getItem('darkMode') === 'true';
-if(dark) document.body.classList.add('dark'), themeToggle.textContent='🌙';
-
-langToggle.addEventListener('click',()=>{
+const navLinks=document.querySelectorAll('nav a');
+document.getElementById('langToggle').addEventListener('click', ()=>{
   if(lang==='en'){
     navLinks[0].textContent='Tatuazhet';
     navLinks[1].textContent='Dizajnet';
     navLinks[2].textContent='Kontakti';
-    langToggle.textContent='EN';
     lang='sq';
+    document.getElementById('langToggle').textContent='EN';
   } else {
     navLinks[0].textContent='Tattoos';
     navLinks[1].textContent='Designs';
     navLinks[2].textContent='Contact';
-    langToggle.textContent='AL';
     lang='en';
+    document.getElementById('langToggle').textContent='AL';
   }
 });
 
-themeToggle.addEventListener('click',()=>{
-  dark=!dark;
-  document.body.classList.toggle('dark',dark);
-  themeToggle.textContent=dark?'🌙':'☀️';
-  localStorage.setItem('darkMode',dark);
+// Dark/light mode toggle
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  const isDark=document.body.classList.toggle('dark');
+  localStorage.setItem('darkMode',isDark);
+  document.getElementById('themeToggle').textContent=isDark?'🌙':'☀️';
 });
 </script>
 
