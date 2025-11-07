@@ -5,25 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nea Tattoo</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #ffffff;
-  --text: #111111;
-  --button-bg: #111111;
-  --button-text: #ffffff;
+  --bg-body: #ffffff;
+  --text-body: #111111;
+  --btn-bg: #111111;
+  --btn-text: #ffffff;
 }
 body.dark {
-  --bg: #111111;
-  --text: #f5f5f5;
-  --button-bg: #f5f5f5;
-  --button-text: #111111;
+  --bg-body: #111111;
+  --text-body: #f5f5f5;
+  --btn-bg: #f5f5f5;
+  --btn-text: #111111;
 }
+
+* { box-sizing: border-box; margin:0; padding:0; }
 
 body {
   font-family: sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg-body);
+  color: var(--text-body);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +34,7 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
-/* Top-right controls */
+/* Top right controls */
 .controls {
   position: absolute;
   top: 15px;
@@ -42,16 +42,17 @@ body {
   display: flex;
   gap: 10px;
 }
+
 .toggle {
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
   padding: 4px 10px;
   border-radius: 8px;
-  background: var(--button-bg);
-  color: var(--button-text);
-  transition: 0.2s;
+  background: var(--btn-bg);
+  color: var(--btn-text);
   border: none;
+  transition: background 0.3s, color 0.3s;
 }
 .toggle:hover { opacity: 0.8; }
 
@@ -60,13 +61,14 @@ main h2 {
   font-size: 2.2rem;
   margin-bottom: 40px;
 }
+
 main a {
   display: block;
   width: 220px;
   padding: 18px;
   margin: 15px auto;
-  background: var(--button-bg);
-  color: var(--button-text);
+  background: var(--btn-bg);
+  color: var(--btn-text);
   text-decoration: none;
   font-weight: 700;
   border-radius: 10px;
@@ -96,44 +98,49 @@ main a:hover { transform: scale(1.05); }
 </main>
 
 <script>
-// Elements
-const langToggle = document.getElementById('langToggle');
-const themeToggle = document.getElementById('themeToggle');
-const bodyEl = document.body;
+let lang = localStorage.getItem('lang') || 'en';
+let dark = localStorage.getItem('darkMode') === 'true';
+
+// Apply saved dark mode
+if(dark) document.body.classList.add('dark');
+document.getElementById('themeToggle').textContent = dark ? '🌙' : '☀️';
+
+// Apply saved language
+const title = document.getElementById('title');
 const tattoosBtn = document.getElementById('tattoos-btn');
 const designsBtn = document.getElementById('designs-btn');
 const contactBtn = document.getElementById('contact-btn');
+const langToggle = document.getElementById('langToggle');
 
-let lang = 'en';
-
-// Load saved theme
-if(localStorage.getItem('darkMode') === 'true'){
-  bodyEl.classList.add('dark');
-  themeToggle.textContent = '🌙';
-}
-
-// Theme toggle
-themeToggle.addEventListener('click', ()=>{
-  const isDark = bodyEl.classList.toggle('dark');
-  localStorage.setItem('darkMode', isDark);
-  themeToggle.textContent = isDark ? '🌙' : '☀️';
-});
-
-// Language toggle
-langToggle.addEventListener('click', ()=>{
-  if(lang==='en'){
+function applyLanguage() {
+  if(lang==='sq'){
     tattoosBtn.textContent = 'Tatuazhet';
     designsBtn.textContent = 'Dizajnet e Mia';
     contactBtn.textContent = 'Kontakti';
     langToggle.textContent = 'EN';
-    lang='sq';
   } else {
     tattoosBtn.textContent = 'Tattoos';
     designsBtn.textContent = 'My Designs';
     contactBtn.textContent = 'Contact';
     langToggle.textContent = 'AL';
-    lang='en';
   }
+}
+applyLanguage();
+
+// Language toggle
+langToggle.addEventListener('click', ()=>{
+  lang = lang==='en' ? 'sq':'en';
+  localStorage.setItem('lang', lang);
+  applyLanguage();
+});
+
+// Dark/light toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', ()=>{
+  dark = !dark;
+  document.body.classList.toggle('dark', dark);
+  localStorage.setItem('darkMode', dark);
+  themeToggle.textContent = dark ? '🌙' : '☀️';
 });
 </script>
 
